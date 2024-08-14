@@ -26,7 +26,6 @@ export default function Login() {
             if (data.access) {
                 localStorage.setItem('accessToken', data.access);
                 localStorage.setItem('refreshToken', data.refresh);
-                console.log("You're logged in?");
                 navigate('/dashboard');
             } else {
                 setError('Invalid Credentials');

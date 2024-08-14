@@ -10,6 +10,16 @@ export default function Register() {
 
     const navigate = useNavigate();
 
+    function validateEmail(emailString){
+        let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        return pattern.test(emailString);
+    }
+
+    function validatePassword(passwordString){
+        let patternPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
+        return patternPassword.test(passwordString);
+    }
+
     function validate(){
         let isValid =  true;
         let errorData = {};
@@ -58,6 +68,47 @@ export default function Register() {
         }
     }
 
+    function handleEmailChange(e){
+        let emailString = e.target.value;
+        setEmail(emailString);
+        if(!validateEmail(emailString)){
+            setError((err => (
+                {
+                    ...err,
+                    email: "Please enter a valid email address"
+                }
+            )))
+            return;
+        } else{
+            setError((err => (
+                {
+                    ...err,
+                    email: null
+                }
+            )))
+        }
+    }
+
+    function handlePasswordChange(e){
+        setPassword(e.target.value);
+        if(!validatePassword(e.target.value)){
+            setError((err => (
+                {
+                    ...err,
+                    password: "The password should contain atleast one lowercase, one uppercase, one digit and one special character. The password should be atleast 8 characters long."
+                }
+            )))
+            return;
+        }else{
+            setError((err => (
+                {
+                    ...err,
+                    password: null
+                }
+            )))
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         if(validate()){
@@ -103,10 +154,10 @@ export default function Register() {
                         type="email"
                         className="register-input"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         required
                     />
-                    {error.email && <p className='register-error'>{error.email}</p>}
+                    {email && error.email && <p className='register-error'>{error.email}</p>}
                 </label>
                 <label className="register-label">
                     Password
@@ -114,10 +165,10 @@ export default function Register() {
                         type="password"
                         className="register-input"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         required
                     />
-                    {error.password && <p className='register-error'>{error.password}</p>}
+                    {password && error.password && <p className='register-error'>{error.password}</p>}
                 </label>
                 <label className="register-label">
                     Confirm Password
@@ -128,7 +179,7 @@ export default function Register() {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
-                    {error.confirm_password && <p className='register-error'>{error.confirm_password}</p>}
+                    {password && confirmPassword && (confirmPassword !== password) && <p className='register-error'>Passwords do not match</p>}
                 </label>
                 <button type="submit" className="register-button">Register</button>
                 <div className="register-footer">
