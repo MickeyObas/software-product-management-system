@@ -37,3 +37,5 @@ backend/*.log
 .env
 *.env
 myenv
+
+brainstorm.txt

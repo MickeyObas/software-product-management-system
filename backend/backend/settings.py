@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     # Local apps
     "api.apps.ApiConfig",
-    "accounts.apps.AccountsConfig"
+    "accounts.apps.AccountsConfig",
+    "profiles.apps.ProfilesConfig"
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# MEDIA SETTINGS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
