@@ -47,7 +47,10 @@ INSTALLED_APPS = [
     # Local apps
     "api.apps.ApiConfig",
     "accounts.apps.AccountsConfig",
-    "profiles.apps.ProfilesConfig"
+    "cards.apps.CardsConfig",
+    "products.apps.ProductsConfig",
+    "profiles.apps.ProfilesConfig",
+    "workspaces.apps.WorkspacesConfig"
 ]
 
 MIDDLEWARE = [
