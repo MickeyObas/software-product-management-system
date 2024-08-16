@@ -10,7 +10,7 @@ frontend/yarn.lock
 /backend/venv/
 /backend/.env
 /backend/__pycache__/
-__pycache__/
+__pycache__
 *.pyc
 /backend/*.pyc
 /backend/*.pyo
