@@ -9,4 +9,8 @@ body{
   /* background: linear-gradient(#2a00B7, #42006c); */
 }
 
- 
+.containerr{
+  width: 100vw;
+  min-height: 100vh;
+  background: #ced8ff;
+}
