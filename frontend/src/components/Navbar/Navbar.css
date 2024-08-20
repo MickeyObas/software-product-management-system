@@ -3,21 +3,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff; /* #333*/
+    background: #FFFFFF; /* #333*/
     padding: 8px 7%;
     height: 60px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo{
     cursor: pointer;
     margin: 0 auto;
     font-weight: 700;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Poppins';
+    font-size: 22px;
 }
 
 ul{
@@ -44,7 +45,8 @@ ul li{
 .search-box{
     display: flex;
     align-items: center;
-    background: #242424;
+    background: #fff;
+    border: 1.5px solid black;
     padding: 2px 15px;
     border-radius: 50px;
 }
@@ -54,13 +56,13 @@ ul li{
     background: transparent;
     border: 0;
     outline: 0;
-    color: #fff;
+    color: #36454F;
     font-size: 18px;
     max-width: 200px;
 }
 
 .search-box input::placeholder{
-    color: white;
+    color: #36454F;
 }
 
 .search-box img{

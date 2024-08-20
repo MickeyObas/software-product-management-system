@@ -1,7 +1,7 @@
 .sidebar {
     width: 200px;
     height: calc(100vh - 60px); /* Full height minus the navbar */
-    background-color: #444;
+    background-color: #FFFFFF; 
     color: white;
     padding: 20px;
     position: fixed;
@@ -9,14 +9,21 @@
     left: 0;
 }
 
+.sidebar h3 {
+  color: #36454F;
+  margin-bottom: 20px;
+}
+
 .sidebar nav a {
     display: block;
-    color: white;
+    color: #36454F;
     padding: 10px 0;
     text-decoration: none;
+    text-align: center;
   }
   
   .sidebar nav a:hover,
   .sidebar nav .active-link {
-    background-color: #666;
+    background-color: #4b49ac;
+    color: #ffffff;
   }

@@ -6,18 +6,22 @@ import { NavLink } from 'react-router-dom';
 function Sidebar() {
   return (
     <div className="sidebar">
-      <h2>My Sidebar</h2>
+      <h3>My Sidebar</h3>
       <nav>
-        <NavLink exact to="/" activeClassName="active-link">
+        <NavLink
+        exact="true"
+        to="/" 
+        className={({isActive}) => isActive ? 'active-link' : ''}
+        >
           Home
         </NavLink>
-        <NavLink to="/about" activeClassName="active-link">
+        <NavLink to="/about" className={({isActive}) => isActive ? 'active=link' : ''}>
           About
         </NavLink>
-        <NavLink to="/services" activeClassName="active-link">
+        <NavLink to="/services" className={({isActive}) => isActive ? 'active=link' : ''}>
           Services
         </NavLink>
-        <NavLink to="/contact" activeClassName="active-link">
+        <NavLink to="/contact" className={({isActive}) => isActive ? 'active=link' : ''}>
           Contact
         </NavLink>
       </nav>

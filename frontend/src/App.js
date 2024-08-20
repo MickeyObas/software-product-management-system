@@ -38,18 +38,12 @@ function App() {
 return (
   <div className="containerr">
     <Router>
-      {isAuthenticated() && <Navbar />} {/* Navbar at the top */}
-      <div className="main-container">
-        {isAuthenticated() && <Sidebar />} {/* Sidebar on the left */}
-        <div className="content"> {/* Content area */}
-          <Routes>
-            <Route path='/' element={isAuthenticated() ? <Dashboard /> : <Navigate to='/login' />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/dashboard' element={<ProtectedRoute component={<Dashboard />}/>}/>
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path='/' element={isAuthenticated() ? <Dashboard /> : <Navigate to='/login' />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/dashboard' element={<ProtectedRoute element={<Dashboard />}/>}/>
+      </Routes>
     </Router>
   </div>
 );

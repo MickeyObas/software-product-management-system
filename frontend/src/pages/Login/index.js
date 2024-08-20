@@ -28,6 +28,7 @@ export default function Login() {
                 localStorage.setItem('accessToken', data.access);
                 localStorage.setItem('refreshToken', data.refresh);
                 const from = location.state?.from || '/';
+                console.log(from);
                 navigate(from);
                 console.log("NAVIGATED");
             } else {
