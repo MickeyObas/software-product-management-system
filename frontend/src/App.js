@@ -1,13 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import Dashboard from './components/Dashboard';
-import Login from './pages/Login';
+// Components 
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
+import ProtectedRoute from './components/ProtectedRoute';
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// Pages
+import Login from './pages/Login';
 import Register from './pages/Register';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import Services from './pages/Services';
+import Dashboard from './pages/Dashboard';
+
 
 function App() {
 
@@ -27,20 +35,24 @@ function App() {
     );
 }; */
 
-  return (
-    <div className='containerr'>
+return (
+  <div className="containerr">
     <Router>
-      <Routes>
-        <Route path='/' element={isAuthenticated() ? <Dashboard /> : <Navigate to='/login'/>}/>
-        <Route path='/register' element={<Register />}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/navbar' element={<Navbar />}/>
-        <Route path='/sidebar' element={<Sidebar />}/>
-      </Routes>
+      {isAuthenticated() && <Navbar />} {/* Navbar at the top */}
+      <div className="main-container">
+        {isAuthenticated() && <Sidebar />} {/* Sidebar on the left */}
+        <div className="content"> {/* Content area */}
+          <Routes>
+            <Route path='/' element={isAuthenticated() ? <Dashboard /> : <Navigate to='/login' />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/dashboard' element={<ProtectedRoute component={<Dashboard />}/>}/>
+          </Routes>
+        </div>
+      </div>
     </Router>
-    </div>
-  )
+  </div>
+);
 }
 
 export default App;

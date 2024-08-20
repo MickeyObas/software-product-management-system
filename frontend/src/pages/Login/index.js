@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'; 
 
 export default function Login() {
@@ -8,6 +8,7 @@ export default function Login() {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -26,7 +27,9 @@ export default function Login() {
             if (data.access) {
                 localStorage.setItem('accessToken', data.access);
                 localStorage.setItem('refreshToken', data.refresh);
-                navigate('/dashboard');
+                const from = location.state?.from || '/';
+                navigate(from);
+                console.log("NAVIGATED");
             } else {
                 setError('Invalid Credentials');
             }

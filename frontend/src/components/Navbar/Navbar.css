@@ -3,8 +3,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
+    background: #fff; /* #333*/
     padding: 8px 7%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
 }
 
 .logo{
