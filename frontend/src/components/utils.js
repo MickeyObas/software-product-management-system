@@ -1,3 +1,5 @@
+import { useLocation, Outlet, Navigate } from "react-router-dom";
+
 export const fetchWithAuth = async (url, options = {}) => {
     // Retrieve the access and refresh tokens
     const accessToken = localStorage.getItem('accessToken');
@@ -43,4 +45,15 @@ export const fetchWithAuth = async (url, options = {}) => {
 
     return response;
 };
+
+export default function ProtectedRoutes(){
+    const isAuthenticated = !!localStorage.getItem('accessToken');
+    const location = useLocation();
+    
+    return (
+        isAuthenticated ?
+        <Outlet /> :
+        <Navigate to='/login' state={{ from: location }} replace />
+    )
+}
  

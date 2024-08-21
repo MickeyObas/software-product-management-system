@@ -3,9 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Components 
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
-import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
 import Login from './pages/Login';
@@ -14,8 +11,10 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Dashboard from './pages/Dashboard';
+import DashboardLayout from './layouts/DashboardLayout/DashboardLayout';
 
+// Utils
+import ProtectedRoutes from './components/utils';
 
 function App() {
 
@@ -24,25 +23,26 @@ function App() {
     return !!token;
   }
 
-  /* const PrivateRoute = ({ element: Component, ...rest }) => {
-    const isAuthenticated = !!(localStorage.getItem('accessToken'));
-    
-    return (
-        <Route
-            {...rest}
-            element={isAuthenticated ? Component : <Navigate to="/login" />}
-        />
-    );
-}; */
 
 return (
   <div className="containerr">
     <Router>
       <Routes>
-        <Route path='/' element={isAuthenticated() ? <Dashboard /> : <Navigate to='/login' />} />
+ 
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoutes />}>
+          <Route path='/' element={<DashboardLayout />}>
+            <Route index element={<Home />} />
+            <Route path='about' element={<About />} />
+            <Route path='contact' element={<Contact />} />
+            <Route path='services' element={<Services />} />
+          </Route>
+        </Route>
+
+        {/* Public Routes */}
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/dashboard' element={<ProtectedRoute element={<Dashboard />}/>}/>
+
       </Routes>
     </Router>
   </div>
