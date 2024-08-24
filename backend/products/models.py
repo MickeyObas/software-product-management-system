@@ -36,9 +36,10 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES, default='software_application')
     description = models.TextField(blank=True, null=True)
-    # The Product Manager in charge of overseeing the product as well as the backlog is the Product Owner
+    # The Product Manager in charge of overseeing the product as well as its backlog is the Product Owner
     owner = models.ForeignKey('profiles.ProductManagerProfile', on_delete=models.CASCADE)
     # Teams assigned to a product
+    # TODO: Consider a better way to handle reverse relationship lmao
     teams = models.ManyToManyField('accounts.Team')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='planning')
     version = models.CharField(max_length=50)

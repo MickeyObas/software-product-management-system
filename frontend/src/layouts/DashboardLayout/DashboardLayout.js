@@ -18,13 +18,7 @@ function DashboardLayout() {
             <div className="main-container">
                 <Sidebar /> {/* Sidebar on the left */}
                 <div className="dashboard-content">
-                    <h1>Welcome to the Dashboard</h1>
-                    <button onClick={() => {
-                        localStorage.removeItem('accessToken');
-                        localStorage.removeItem('refreshToken');
-                        navigate('/login');
-                    }}>Logout</button>
-                <Outlet />
+                    <Outlet />
                 </div>
             </div>
         </div>

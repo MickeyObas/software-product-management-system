@@ -1,12 +1,12 @@
 .sidebar {
-    width: 200px;
-    height: calc(100vh - 60px); /* Full height minus the navbar */
-    background-color: #FFFFFF; 
-    color: white;
-    padding: 20px;
-    position: fixed;
-    top: 60px; /* Below the navbar */
-    left: 0;
+  width: 200px;
+  height: calc(100vh - 45px); /* Full height minus the navbar */
+  background-color: #FFFFFF; 
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 45px; /* Below the navbar */
+  left: 0;
 }
 
 .sidebar h3 {
@@ -14,7 +14,18 @@
   margin-bottom: 20px;
 }
 
-.sidebar nav a {
+.sidebar a{
+  font-size: 16px;
+}
+
+.sidebar button{
+  border: none;
+  background: none;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sidebar nav a, .sidebar button{
     display: block;
     color: #36454F;
     padding: 10px 0;
@@ -25,6 +36,7 @@
   }
   
   .sidebar nav a:hover,
+  .sidebar button:hover,
   .sidebar nav .active-link {
     background-color: #4b49ac;
     color: #ffffff;
