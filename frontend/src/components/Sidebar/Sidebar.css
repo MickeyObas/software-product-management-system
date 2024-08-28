@@ -1,8 +1,7 @@
 .sidebar {
-  width: 200px;
+  width: 350px;
   height: calc(100vh - 45px); /* Full height minus the navbar */
   background-color: #FFFFFF; 
-  color: white;
   padding: 20px;
   position: fixed;
   top: 45px; /* Below the navbar */
@@ -29,9 +28,10 @@
     display: block;
     color: #36454F;
     padding: 10px 0;
+    padding-left: 10px;
     border-radius: 5px;
     text-decoration: none;
-    text-align: center;
+    text-align: left;
     margin-bottom: 3px;
   }
   
@@ -40,4 +40,10 @@
   .sidebar nav .active-link {
     background-color: #4b49ac;
     color: #ffffff;
+  }
+
+  .sidebar hr{
+    background-color: grey;
+    height: 2px;
+    margin-top: -1.5px;
   }

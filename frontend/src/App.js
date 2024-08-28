@@ -15,6 +15,7 @@ import DashboardLayout from './layouts/DashboardLayout/DashboardLayout';
 
 // Utils
 import ProtectedRoutes from './components/utils';
+import Boards from './pages/Boards';
 
 function App() {
 
@@ -34,6 +35,7 @@ return (
           <Route path='/' element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path='about' element={<About />} />
+            <Route path='boards' element={<Boards />} />
             <Route path='contact' element={<Contact />} />
             <Route path='services' element={<Services />} />
           </Route>

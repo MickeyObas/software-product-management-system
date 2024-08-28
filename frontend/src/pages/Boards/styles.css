@@ -1,0 +1,92 @@
+.boards-content{
+    padding-top: 20px;
+    padding-left: 12px; 
+}
+
+.boards-content .recently-viewed-section{
+    margin-bottom: 40px;
+}
+
+.boards-content .recently-viewed-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.boards-content .recently-viewed-header img{
+    height: 16px;
+}
+
+.boards-content .recently-viewed-header h5{
+    margin-bottom: 0;
+}
+
+.recently-viewed-row{
+    display: flex;
+    gap: 10px
+}
+
+.boards-content .recently-viewed-tab{
+    width: 180px;
+    height: 80px;
+    background-color: yellow;
+    border-radius: 8px;
+}
+
+.workspaces-section > h5{
+    margin-bottom: 10px;
+}
+
+.workspaces-section .icon{
+    width: 25px;
+    height: 25px;
+    background-color: yellow;
+    margin-right: 8px;
+}
+
+.boards-content .workspaces-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.boards-content .workspaces-header h5{
+    margin-bottom: 0;
+}
+
+.boards-content .workspaces-menu{
+    margin-left: 150px;
+}
+
+.workspaces-menu a{
+    text-decoration: none;
+    color: black;
+    background: rgba(0,0,0,0.1);
+    padding: 7px 8px;
+    margin-right: 10px;
+}
+
+.boards-content .workspace-boards-section{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 25px;
+}
+
+.workspace-board-tab{
+    width: 20%;
+    height: 85px;
+    background-color: yellow;
+}
+
+.workspace-item{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.workspace-item .icon{
+    width: 25px;
+    height: 25px;
+    background-color: yellow;
+    margin-right: 10px;
+}

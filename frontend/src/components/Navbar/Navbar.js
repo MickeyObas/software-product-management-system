@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Navbar.css';
 
 import search_icon from '../assets/searchh.png';
@@ -30,6 +30,22 @@ function Navbar() {
       }
     })
   }
+
+
+  useEffect(() => {
+    document.addEventListener('click', (e) => {
+      const navbar = document.querySelector('.navigation-bar');
+      if(navbar){
+        const isClickInsideNavbar = navbar.contains(e.target);
+        if(!isClickInsideNavbar){
+          setDropdown({
+            open: false,
+            index: null
+          })
+        }
+      }
+    });
+  }, []);
 
   return (
     <div className='navigation-bar'>
