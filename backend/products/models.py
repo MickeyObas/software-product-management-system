@@ -37,12 +37,12 @@ class Product(models.Model):
     type = models.CharField(max_length=50, choices=PRODUCT_TYPE_CHOICES, default='software_application')
     description = models.TextField(blank=True, null=True)
     # The Product Manager in charge of overseeing the product as well as its backlog is the Product Owner
-    owner = models.ForeignKey('profiles.ProductManagerProfile', on_delete=models.CASCADE)
+    owner = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, default=1)
     # Teams assigned to a product
     # TODO: Consider a better way to handle reverse relationship lmao
-    teams = models.ManyToManyField('accounts.Team')
+    teams = models.ManyToManyField('accounts.Team', blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='planning')
-    version = models.CharField(max_length=50)
+    version = models.CharField(max_length=50, blank=True, null=True)
     repository_url = models.URLField(blank=True, null=True)
     documentation_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -53,9 +53,11 @@ class Product(models.Model):
 
 
 class Board(models.Model):
-    product = models.ForeignKey('products.Product', models.CASCADE)
+    admins = models.ManyToManyField('accounts.CustomUser', related_name='admin_boards')
+    product = models.ForeignKey('products.Product', models.CASCADE, default=1)
+    description = models.TextField()
     title = models.CharField(max_length=255)
-    visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES)
+    visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='workspace')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
