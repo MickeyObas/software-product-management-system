@@ -47,3 +47,54 @@
     height: 2px;
     margin-top: -1.5px;
   }
+
+
+  .sidebar .workspace-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    padding-left: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .sidebar .workspace-item .title-bar:hover{
+    background-color: #4b49ac;
+    color: #ffffff;
+  }
+
+  .sidebar .workspace-item .title-bar{
+    padding: 8px 10px;
+    display: flex;
+  }
+
+  .sidebar .workspaces-list-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar .workspace-dropdown-menu {
+    list-style-type: none;
+    padding-bottom: 0px;
+  }
+
+  .sidebar .workspace-dropdown-menu a,
+  .sidebar .workspace-dropdown-menu li{
+    margin-bottom: 0px;
+    width: 100%;
+  }
+
+.sidebar .workspace-dropdown-menu .tab{
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .workspace-dropdown-menu img{
+  height: 22px;
+  margin-right: 8px;
+}
+
+.sidebar .workspace-dropdown-menu .default-icon:hover{
+  display: none;
+}

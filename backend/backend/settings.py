@@ -158,6 +158,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+}
+
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'

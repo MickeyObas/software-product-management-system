@@ -35,7 +35,7 @@ return (
           <Route path='/' element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path='about' element={<About />} />
-            <Route path='boards' element={<Boards />} />
+            <Route path=':username/boards' element={<Boards />} />
             <Route path='contact' element={<Contact />} />
             <Route path='services' element={<Services />} />
           </Route>

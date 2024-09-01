@@ -17,6 +17,7 @@ export const fetchWithAuth = async (url, options = {}) => {
 
     // If the response indicates an expired token, attempt to refresh
     if (response.status === 401 && refreshToken) {
+        console.log("Token expired");
         // Attempt to refresh the token
         const refreshResponse = await fetch('http://localhost:8000/api/token/refresh/', {
             method: 'POST',
@@ -27,10 +28,10 @@ export const fetchWithAuth = async (url, options = {}) => {
         });
 
         if (refreshResponse.ok) {
+            console.log("Attempting Refresh")
             const data = await refreshResponse.json();
             // Update local storage with new tokens
             localStorage.setItem('accessToken', data.access);
-            localStorage.setItem('refreshToken', data.refresh);
 
             // Retry the original request with the new access token
             headers['Authorization'] = `Bearer ${data.access}`;
@@ -38,11 +39,12 @@ export const fetchWithAuth = async (url, options = {}) => {
         } else {
             // Handle the case where refreshing the token fails
             // For example, redirect to the login page
+            console.log("Whoops: Something failed in refreshinh")
             window.location.href = '/login';
             return;
         }
     }
-
+    console.log("Authenticated Stuff Done")
     return response;
 };
 
