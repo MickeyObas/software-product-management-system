@@ -13,5 +13,6 @@ urlpatterns = [
     path('register/', views.user_register, name='user_register'),
     # More Routes
     path('workspaces/', include('workspaces.urls')),
-    path('products/', include('products.urls'))
+    path('products/', include('products.urls')),
+    path('users/', include('accounts.urls'))
 ]
