@@ -2,7 +2,6 @@ import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import './DashboardLayout.css';
 
-
 // Components
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';

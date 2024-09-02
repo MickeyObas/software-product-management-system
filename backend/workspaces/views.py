@@ -21,6 +21,18 @@ def create_workspace(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def workspace_detail(request, pk):
+    try:
+        workspace = Workspace.objects.get(id=pk)
+    except Workspace.DoesNotExist:
+        return Response({"error": "Workspace not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = WorkspaceSerializer(workspace)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def workspace_list(request):
     user_workspaces = Workspace.objects.filter(owner=request.user)
     serializer = WorkspaceSerializer(user_workspaces, many=True)

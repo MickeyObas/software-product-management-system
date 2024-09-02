@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Sidebar.css';
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { fetchWithAuth } from '../utils';
+import { UserContext } from "../UserContext";
 
 import settings_icon from '../assets/settings.png';
 import members_icon from '../assets/meeting.png';
@@ -12,6 +13,7 @@ import board_icon_white from '../assets/blackboard-white.png';
 function Sidebar() {
 
   const navigate = useNavigate();
+  const {user, loading} = useContext(UserContext);
 
   const [workspaces, setWorkspaces] = useState([]);
   const [openWorkspaceId, setOpenWorkspaceId] = useState(null);
@@ -40,6 +42,10 @@ function Sidebar() {
       console.log(id)
       setOpenWorkspaceId(openWorkspaceId === id ? null : id);
     }
+  
+  if(!user){
+    return <h1>Loading</h1>
+  }
 
   return (
     <div className="sidebar">
@@ -52,7 +58,7 @@ function Sidebar() {
         >
           Home
         </NavLink>
-        <NavLink to="/boards" className={({isActive}) => isActive ? 'active=link' : ''}>
+        <NavLink to={`${user.email}/boards`} className={({isActive}) => isActive ? 'active=link' : ''}>
           Boards
         </NavLink>
         <button onClick={() => {
@@ -61,7 +67,7 @@ function Sidebar() {
           navigate('/login');
         }}>Logout</button>
         <hr />
-        <div style={{"marginLeft": "4px", "marginBottom": "15px"}}>Workspaces</div>
+        <div style={{"marginLeft": "4px", "marginBottom": "15px" ,"fontSize": "15px"}}>Workspaces</div>
         <div className="workspaces-list-container">
         {workspaces.map((workspace, idx) => (
           <div className="workspace-item" onClick={() => handleWorkspaceClick(workspace.id)}>

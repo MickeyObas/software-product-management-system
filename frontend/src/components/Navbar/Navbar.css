@@ -132,6 +132,11 @@
 .navigation-bar .workspaces-dropdown-sub-tab{
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
+}
+
+.navigation-bar .workspaces-dropdown-sub-tab:last-child{
+    margin-bottom: 0px;
 }
 
 .navigation-bar .workspaces-dropdown-sub-tab .icon{
@@ -144,8 +149,9 @@
     margin-right: 8px;
 }
 
-.navigation-bar .workspaces-dropdown-sub-tab .title{
+.navigation-bar .workspaces-dropdown-sub-tab .title a{
     font-size: 14px;
+    color: white;
 }
 
 .navigation-bar .recent-dropdown-tab{

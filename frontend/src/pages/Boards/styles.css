@@ -21,7 +21,7 @@
     margin-bottom: 0;
 }
 
-.recently-viewed-row{
+.boards-content .recently-viewed-row{
     display: flex;
     gap: 10px
 }
@@ -33,11 +33,11 @@
     border-radius: 8px;
 }
 
-.workspaces-section > h5{
+.boards-content .workspaces-section > h5{
     margin-bottom: 10px;
 }
 
-.workspaces-section .icon{
+.boards-content .workspaces-section .icon{
     width: 25px;
     height: 25px;
     background-color: yellow;
@@ -58,7 +58,7 @@
     margin-left: 150px;
 }
 
-.workspaces-menu a{
+.boards-content .workspaces-menu a{
     text-decoration: none;
     color: black;
     background: rgba(0,0,0,0.1);
@@ -73,18 +73,18 @@
     row-gap: 25px;
 }
 
-.workspace-board-tab{
+.boards-content .workspace-board-tab{
     width: 20%;
     height: 85px;
     background-color: yellow;
 }
 
-.workspace-item{
+.boards-content .workspace-item{
     display: flex;
     margin-bottom: 15px;
 }
 
-.workspace-item .icon{
+.boards-content .workspace-item .icon{
     width: 25px;
     height: 25px;
     background-color: yellow;

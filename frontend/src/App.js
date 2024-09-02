@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { UserProvider } from './components/UserContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Components 
@@ -11,6 +12,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Services from './pages/Services';
+import Workspace from './pages/Workspace';
 import DashboardLayout from './layouts/DashboardLayout/DashboardLayout';
 
 // Utils
@@ -27,7 +29,8 @@ function App() {
 
 return (
   <div className="containerr">
-    <Router>
+  <UserProvider>
+  <Router>
       <Routes>
  
         {/* Protected Routes */}
@@ -38,6 +41,7 @@ return (
             <Route path=':username/boards' element={<Boards />} />
             <Route path='contact' element={<Contact />} />
             <Route path='services' element={<Services />} />
+            <Route path='workspaces/:workspaceId' element={<Workspace />}/>
           </Route>
         </Route>
 
@@ -47,6 +51,8 @@ return (
 
       </Routes>
     </Router>
+  </UserProvider>
+    
   </div>
 );
 }

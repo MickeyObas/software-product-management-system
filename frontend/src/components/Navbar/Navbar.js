@@ -1,10 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
 import './Navbar.css';
+import { useState, useEffect } from 'react';
+import { fetchWithAuth } from '../utils';
 
 import search_icon from '../assets/searchh.png';
 import toggle_icon from '../assets/toggle.png';
 import profile_icon from '../assets/profile.png';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
 
@@ -12,6 +14,7 @@ function Navbar() {
     open: false,
     index: null
   });
+  const [workspaces, setWorkspaces] = useState([]);
 
 
   const handleDropdownClick = (e, index) => {
@@ -31,6 +34,33 @@ function Navbar() {
     })
   }
 
+  const handleTabClick = () => {
+    setDropdown({
+      open: false,
+      index: null
+    });
+  };
+
+  useEffect(() => {
+    const fetchWorkspaces = async () => {
+        try {
+            const response = await fetchWithAuth('http://localhost:8000/api/workspaces/', {
+                method: 'GET',
+            });
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data)
+            setWorkspaces(data);
+        } catch (error) {
+            console.error("Error fetching workspaces:", error);
+        }
+    };
+
+    fetchWorkspaces();
+}, []);
+
 
   useEffect(() => {
     document.addEventListener('click', (e) => {
@@ -46,6 +76,10 @@ function Navbar() {
       }
     });
   }, []);
+
+  useEffect(() => {
+
+  });
 
   return (
     <div className='navigation-bar'>
@@ -65,24 +99,20 @@ function Navbar() {
                   <hr className='dropdown-divider'/>
                   <div className='workspaces-dropdown-tab'>
                     <div className='title-text'>Your Workspaces</div>
-                    <div className='workspaces-dropdown-sub-tab'>
+                    {workspaces && workspaces.map((workspace, idx) => (
+                      <div
+                      className='workspaces-dropdown-sub-tab'
+                      onClick={handleTabClick}
+                      >
                       <div className='icon'></div>
-                      <div className='title'>Mickey's Workspace</div>
+                      <div className='title'>
+                        <NavLink
+                        to={`workspaces/${workspace.id}`}
+                        >{workspace.title}</NavLink>
+                      </div>
                     </div>
-                  </div>
-                  <div className='workspaces-dropdown-tab'>
-                    <div className='workspaces-dropdown-sub-tab'>
-                      <div className='icon'></div>
-                      <div className='title'>Mickey's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='workspaces-dropdown-tab'>
-                    <div className='workspaces-dropdown-sub-tab'>
-                      <div className='icon'></div>
-                      <div className='title'>Mickey's Workspace</div>
-                    </div>
-                  </div>
-                    
+                    ))}
+                  </div>          
                   {/* <li><a href='/'>My Workspaces</a></li>
                   <hr className='dropdown-divider'/>
                   <li><a href='/'>Recent Workspaces</a></li> */}
