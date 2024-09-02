@@ -12,30 +12,21 @@ import elipsis_icon from '../../components/assets/more.png';
 import plus_icon from '../../components/assets/plus-white.png';
 import close_icon from '../../components/assets/close.png';
 
+import List from "../../components/List";
 import { fetchWithAuth } from "../../components/utils";
 
 export default function Board(){
 
-    const [isAddingCard, setIsAddingCard] = useState(false);
-    const [cardTitle, setCardTitle] = useState('');
-
-    const handleAddCardClick = () => {
-        setIsAddingCard(true);
-    };
-
-    const handleAddCard = (e) => {
-        e.preventDefault();
-        // Logic to add the card goes here
-        console.log('Card Added:', cardTitle);
-        console.log(e.target.closest(".list-item").dataset.index);
-        // Reset the state
-        setCardTitle('');
-        setIsAddingCard(false);
-    };
-
-    const handleCancel = () => {
-        setIsAddingCard(false);
-    };
+    const [lists, setLists] = useState([
+        {id: 1, cards:["Card 1", "Card 2", "Card 3", "Another Card"]},
+        {id: 2, cards: ["Card 1"]},
+        {id: 3, cards: ["Card 1", "Card 2"]},
+        {id: 3, cards: ["Card 1", "Card 2", "Card 3"]},
+    ]);
+    const [isAddingCard, setIsAddingCard] = useState({
+        status: false,
+        index: null
+    });
 
     return (
         <div className="board-content">
@@ -52,151 +43,14 @@ export default function Board(){
             </div>
             <div className="board-container">
                 <ol className="board">
-                    <li className="list-item" data-index="1">
-                        <div className="list-item-container">
-                            <div className="list-item-header">
-                                <h2>My List</h2>
-                                <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
-                            </div>
-                            <ol className="list-cards-container">
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                {isAddingCard ? (
-                                <li className="add-card-item">
-                                    <form>
-                                        <textarea placeholder="Enter a name for this card..." draggable="false"></textarea>
-                                        <div className="bar">
-                                            <button onClick={(e)=> handleAddCard(e)}>Add card</button>
-                                            <img src={close_icon} alt="close-icon"
-                                            onClick={handleCancel}
-                                            />
-                                        </div>
-                                    </form>
-                                </li> 
-                                ) : (
-                                <div className="list-item-footer">
-                                    <button onClick={handleAddCardClick}>
-                                        <img src={plus_icon} alt="plus-icon"/>
-                                        <span>Add a card</span>
-                                    </button>
-                                </div>
-                                )}
-                            </ol>
-                        </div>
-                    </li>
-                    <li className="list-item">
-                        <div className="list-item-container">
-                            <div className="list-item-header">
-                                <h2>My List</h2>
-                                <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
-                            </div>
-                            <ol className="list-cards-container">
-                                <li className="list-card">My First Card</li>
-                                <li className="add-card-item">
-                                    <form>
-                                        <textarea placeholder="Enter a name for this card..." draggable="false"></textarea>
-                                        <div className="bar">
-                                            <button>Add card</button>
-                                            <img src={close_icon} alt="close-icon"/>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ol>
-                            <div className="list-item-footer">
-                                <button>
-                                    <img src={plus_icon} alt="plus-icon"/>
-                                    <span>Add a card</span>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li className="list-item">
-                        <div className="list-item-container">
-                            <div className="list-item-header">
-                                <h2>My List</h2>
-                                <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
-                            </div>
-                            <ol className="list-cards-container">
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="add-card-item">
-                                    <form>
-                                        <textarea placeholder="Enter a name for this card..." draggable="false"></textarea>
-                                        <div className="bar">
-                                            <button>Add card</button>
-                                            <img src={close_icon} alt="close-icon"/>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ol>
-                            <div className="list-item-footer">
-                                <button>
-                                    <img src={plus_icon} alt="plus-icon"/>
-                                    <span>Add a card</span>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li className="list-item">
-                        <div className="list-item-container">
-                            <div className="list-item-header">
-                                <h2>My List</h2>
-                                <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
-                            </div>
-                            <ol className="list-cards-container">
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="add-card-item">
-                                    <form>
-                                        <textarea placeholder="Enter a name for this card..." draggable="false"></textarea>
-                                        <div className="bar">
-                                            <button>Add card</button>
-                                            <img src={close_icon} alt="close-icon"/>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ol>
-                            <div className="list-item-footer">
-                                <button>
-                                    <img src={plus_icon} alt="plus-icon"/>
-                                    <span>Add a card</span>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li className="list-item">
-                        <div className="list-item-container">
-                            <div className="list-item-header">
-                                <h2>My List</h2>
-                                <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
-                            </div>
-                            <ol className="list-cards-container">
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="list-card">My First Card</li>
-                                <li className="add-card-item">
-                                    <form>
-                                        <textarea placeholder="Enter a name for this card..." draggable="false"></textarea>
-                                        <div className="bar">
-                                            <button>Add card</button>
-                                            <img src={close_icon} alt="close-icon"/>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ol>
-                            <div className="list-item-footer">
-                                <button>
-                                    <img src={plus_icon} alt="plus-icon"/>
-                                    <span>Add a card</span>
-                                </button>
-                            </div>
-                        </div>
-                    </li>
+                    {lists && lists.map((list, idx) => (
+                        <List key={idx}
+                        listId={idx}
+                        setIsAddingCard={setIsAddingCard}
+                        isAddingCard={isAddingCard}
+                        cards={list.cards}
+                        />
+                    ))}
                 </ol>
             </div>
         </div>
