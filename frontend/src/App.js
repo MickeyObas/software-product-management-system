@@ -13,11 +13,13 @@ import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Workspace from './pages/Workspace';
+import Boards from './pages/Boards';
+import Board from './pages/Board';
 import DashboardLayout from './layouts/DashboardLayout/DashboardLayout';
 
 // Utils
 import ProtectedRoutes from './components/utils';
-import Boards from './pages/Boards';
+
 
 function App() {
 
@@ -37,7 +39,7 @@ return (
         <Route element={<ProtectedRoutes />}>
           <Route path='/' element={<DashboardLayout />}>
             <Route index element={<Home />} />
-            <Route path='about' element={<About />} />
+            <Route path='/boards/:boardId/:boardTitle/' element={<Board />}/>
             <Route path=':username/boards' element={<Boards />} />
             <Route path='contact' element={<Contact />} />
             <Route path='services' element={<Services />} />

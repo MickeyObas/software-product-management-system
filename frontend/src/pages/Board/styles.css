@@ -1,0 +1,188 @@
+.board-content{
+    height: 100%;
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
+.board-content .board-header{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 60px;
+    padding: 15px;
+    background: rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 100%;
+}
+
+.board-content .board-header h5{
+    margin: 0;
+    font-weight: bold;
+}
+
+.board-content .favourite-button{
+    height: 15px;
+    margin-left: 30px;
+}
+
+.board-content .members-button{
+    height: 18px;
+    margin-left: 30px;
+}
+
+.board-content .profile-button{
+    height: 28px;
+    margin-left: 530px;
+    margin-right: 10px;
+}
+
+.board-content .add-member-button{
+    border: none;
+    background: whitesmoke;
+    padding: 4px 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.board-content .add-member-button img{
+    height: 14px;
+    margin-right: 4px;
+}
+
+.board-content .toggleSideMenuButton{
+    height: 25px;
+}
+
+.board-content .board-container{
+    margin-top: 20px;
+    padding-left: 15px;
+    width: 100%;
+    overflow-x: auto;
+    height: 100%;
+}
+
+.board-content .board-container .board{
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    overflow-x: auto;
+    height: 80%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.board-content .board-container .board .list-item{
+    width: 300px;
+    border-radius: 8px;
+    margin-right: 15px;
+    background-color: #4b49ac;
+    display: block;
+    flex-shrink: 0;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.board-content .list-item-container{
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+}
+
+.board-content .list-item-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.board-content .list-item-header h2{
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 8px;
+    color: whitesmoke;
+}
+
+.board-content .list-item-header img{
+    height: 25px;
+}
+
+.board-content .list-cards-container{
+    color: whitesmoke;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.board-content .list-cards-container .list-card{
+    background-color: #706fa7;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.board-content .list-cards-container .list-card:hover{
+    outline: 3.5px solid white
+}
+
+.board-content .list-item-footer{
+    display: flex;
+    align-items: center;
+}
+
+.board-content .list-item-footer button{
+    background: none;
+    border: none;
+    padding: 6px 8px;
+    width: 100%;
+    border-radius: 8px;
+    text-align: left;
+    color: whitesmoke;
+}
+
+.board-content .list-item-footer button:hover{
+    background: rgba(0,0,0,0.1);
+}
+
+.board-content .list-item-footer img{
+    height: 16px;
+    margin-right: 10px;
+}
+
+.board-content .add-card-item textarea{
+    width: 100%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    white-space: pre-wrap;
+    resize: none;
+    overflow-y: hidden;
+    background-color: #706fa7;
+    color: whitesmoke
+}
+
+.board-content .add-card-item textarea::placeholder{
+    color: whitesmoke;
+}
+
+.board-content .add-card-item .bar button{
+    margin-top: 2px;
+    margin-right: 15px;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #d9e6fe;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.board-content .add-card-item .bar{
+    display: flex;
+    align-items: center;
+}
+
+.board-content .add-card-item .bar img{
+    height: 14px;
+    cursor: pointer;
+}
