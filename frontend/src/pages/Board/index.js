@@ -17,6 +17,8 @@ import { fetchWithAuth } from "../../components/utils";
 
 export default function Board(){
 
+    const {boardId,  boardTitle} = useParams();
+
     const [lists, setLists] = useState([
         {id: 1, cards:["Card 1", "Card 2", "Card 3", "Another Card"]},
         {id: 2, cards: ["Card 1"]},

@@ -4,7 +4,11 @@ from rest_framework.decorators import api_view, permission_classes
 
 from .models import Product, Board
 from workspaces.models import Workspace
-from .serializers import ProductSerialzer, BoardSerializer
+from .serializers import (
+    ProductSerialzer,
+    BoardSerializer,
+    ListSerializer
+)
 
 
 @api_view(['POST'])
@@ -22,4 +26,19 @@ def product_list(request):
     user_products = Product.objects.filter(owner=request.user)
     serializer = ProductSerialzer(user_products, many=True)
     return Response(serializer.data)
-        
+
+
+@api_view(['GET'])
+def lists_for_board(request, pk):
+    try:
+        board = Board.objects.get(id=pk)
+    except Board.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    board_lists = Board.objects.filter(
+        board=board,
+        product__owner=request.user
+    )
+
+    serializer = ListSerializer(board_lists, many=True)
+    return Response(serializer.data)
