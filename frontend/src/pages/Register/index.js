@@ -127,18 +127,14 @@ export default function Register() {
 
                 if(response.ok){
                     const data = await response.json();
-                    console.log("User registered successfully: ", data);
                     navigate('/login/');
                 }else{
-                    console.log("Whoops, something went wrong!");
                     const errorData = await response.json();
                     handleErrors(errorData);
                 }
             } catch(err){
-                console.log("Error during fetch call!");
             }
         } else{
-            console.log("You got some errors");
             console.log(error);
         }
     }

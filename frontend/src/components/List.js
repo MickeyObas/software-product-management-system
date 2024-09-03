@@ -24,7 +24,6 @@ export default function List({
 
     const handleAddCard = (e) => {
         e.preventDefault();
-        console.log("Added card: ", cardTitle);
         setCardTitle('');
         setIsAddingCard(false);
     };

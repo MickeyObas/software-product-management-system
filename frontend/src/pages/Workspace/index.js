@@ -16,7 +16,6 @@ export default function Workspace(){
         const fetchWorkspaceData = async () => {
           try {
             const response = await fetchWithAuth(`http://localhost:8000/api/workspaces/${workspaceId}/`);
-            console.log(response);
     
             if (response.ok) {
               const data = await response.json();
@@ -38,7 +37,6 @@ export default function Workspace(){
         const fetchBoardsData = async () => {
           try {
             const response = await fetchWithAuth(`http://localhost:8000/api/workspaces/${workspaceId}/boards/`);
-            console.log(response);
     
             if (response.ok) {
               const data = await response.json();

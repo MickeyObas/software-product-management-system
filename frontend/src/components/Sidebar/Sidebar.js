@@ -28,7 +28,6 @@ function Sidebar() {
                     throw new Error(`Error: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log(data)
                 setWorkspaces(data);
             } catch (error) {
                 console.error("Error fetching workspaces:", error);
@@ -39,7 +38,6 @@ function Sidebar() {
     }, []);
 
     const handleWorkspaceClick = (id) => {
-      console.log(id)
       setOpenWorkspaceId(openWorkspaceId === id ? null : id);
     }
   

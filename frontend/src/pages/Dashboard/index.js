@@ -9,7 +9,6 @@ import './styles.css'; // Assuming you have some styles for the dashboard
 
 function Dashboard() {
 
-  console.log("Dashboard reached finally")
   const navigate = useNavigate();
 
   return (

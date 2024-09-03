@@ -19,21 +19,46 @@ export default function Board(){
 
     const {boardId,  boardTitle} = useParams();
 
-    const [lists, setLists] = useState([
+    const dummyLists = [
         {id: 1, cards:["Card 1", "Card 2", "Card 3", "Another Card"]},
         {id: 2, cards: ["Card 1"]},
         {id: 3, cards: ["Card 1", "Card 2"]},
         {id: 3, cards: ["Card 1", "Card 2", "Card 3"]},
-    ]);
+    ]
+
+    const [lists, setLists] = useState();
     const [isAddingCard, setIsAddingCard] = useState({
         status: false,
         index: null
     });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchLists = async () => {
+            try {
+                const response = await fetchWithAuth(`http://localhost:8000/api/boards/${boardId}/lists/`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setLists(data);
+                } else {
+                    setError('Failed to fetch lists.');
+                }
+            } catch (err) {
+                setError('An error occurred while fetching lists.');
+            } finally {
+                setLoading(false);
+                console.log(lists);
+            }
+        };
+
+        fetchLists();
+    }, [boardId]);
 
     return (
         <div className="board-content">
             <div className="board-header">
-                <h5>Board Title</h5>
+                <h5>{boardTitle}</h5>
                 <img className="favourite-button" src={star_icon} alt="star-icon"/>
                 <img className="members-button" src={people_icon} alt="people-icon"/>
                 <img className="profile-button" src={profile_icon} alt="people-icon"/>

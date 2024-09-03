@@ -1,6 +1,9 @@
 .boards-content{
     padding-top: 20px;
     padding-left: 12px; 
+    overflow-y: scroll;
+    height: 100%;
+    padding-bottom: 75px;
 }
 
 .boards-content .recently-viewed-section{
@@ -29,12 +32,16 @@
 .boards-content .recently-viewed-tab{
     width: 180px;
     height: 80px;
-    background-color: yellow;
-    border-radius: 8px;
+    background-color: #4b49ac;
+    border-radius: 4px;
+}
+
+.boards-content .workspace-section{
+    margin-bottom: 15px;
 }
 
 .boards-content .workspaces-section > h5{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .boards-content .workspaces-section .icon{
@@ -48,10 +55,15 @@
     display: flex;
     align-items: center;
     margin-bottom: 25px;
+    justify-content: space-between;
+    padding-right: 50px;
+    position: relative;
 }
 
 .boards-content .workspaces-header h5{
     margin-bottom: 0;
+    position: absolute;
+    left: 35px
 }
 
 .boards-content .workspaces-menu{
@@ -67,16 +79,37 @@
 }
 
 .boards-content .workspace-boards-section{
+    min-height: 100px;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     column-gap: 10px;
     row-gap: 25px;
 }
 
-.boards-content .workspace-board-tab{
+.boards-content .workspace-board-tab-link {
     width: 20%;
     height: 85px;
-    background-color: yellow;
+    background-color: #4b49ac;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+
+    text-decoration: none;
+    display: block;
+}
+
+.boards-content .workspace-board-tab-link:hover{
+    background-color: #6563be;
+}
+
+.boards-content .workspace-board-tab-link.create{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
 .boards-content .workspace-item{

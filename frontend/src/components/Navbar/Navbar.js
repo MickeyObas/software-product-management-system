@@ -51,7 +51,6 @@ function Navbar() {
                 throw new Error(`Error: ${response.status}`);
             }
             const data = await response.json();
-            console.log(data)
             setWorkspaces(data);
         } catch (error) {
             console.error("Error fetching workspaces:", error);

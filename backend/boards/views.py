@@ -14,7 +14,7 @@ def lists_for_board(request, pk):
     
     board_lists = List.objects.filter(
         board=board,
-        product__owner=request.user
+        board__product__owner=request.user
     )
 
     serializer = ListSerializer(board_lists, many=True)

@@ -15,13 +15,13 @@ class ChecklistItem(models.Model):
     is_completed = models.BooleanField(default=False)
 
 class Card(models.Model):
-    list = models.ForeignKey('products.List', on_delete=models.CASCADE)
+    list = models.ForeignKey('boards.List', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     is_watched = models.BooleanField(default=False)
     description = models.TextField(blank=True, null=True)
-    members = models.ManyToManyField('accounts.CustomUser')
+    members = models.ManyToManyField('accounts.CustomUser', blank=True)
     order = models.PositiveIntegerField(default=0)
-    labels = models.ManyToManyField('cards.Label')
+    labels = models.ManyToManyField('cards.Label', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

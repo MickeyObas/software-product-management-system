@@ -39,7 +39,9 @@ export const fetchWithAuth = async (url, options = {}) => {
         } else {
             // Handle the case where refreshing the token fails
             // For example, redirect to the login page
-            console.log("Whoops: Something failed in refreshinh")
+            console.log("Whoops: Something failed in refreshinh");
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken')
             window.location.href = '/login';
             return;
         }
