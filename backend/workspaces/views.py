@@ -5,8 +5,10 @@ from rest_framework import status
 
 from .serializers import WorkspaceSerializer
 from .models import Workspace
-from products.models import Board, Product
-from products.serializers import ProductSerialzer, BoardSerializer
+from products.models import Product
+from boards.models import Board
+from products.serializers import ProductSerialzer
+from boards.serializers import BoardSerializer
 
 
 @api_view(['POST'])

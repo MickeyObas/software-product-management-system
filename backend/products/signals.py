@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import Product, Board
+from .models import Product
+from boards.models import Board
 
 @receiver(post_save, sender=Product)
 def create_boards_for_product(sender, instance, created, **kwargs):

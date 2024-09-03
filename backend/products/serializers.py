@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Product, Board, List
+from .models import Product
 
 
 class ProductSerialzer(serializers.ModelSerializer):
@@ -17,26 +17,4 @@ class ProductSerialzer(serializers.ModelSerializer):
             "version",
             "repository_url",
             "documentation_url"
-        ]
-
-
-class BoardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Board
-        fields = [
-            "admins",
-            "product",
-            "title",
-            "description",
-            "visibility"
-        ]
-
-class ListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = List
-        fields = [
-            "id",
-            "board",
-            "title", 
-            "order"
         ]

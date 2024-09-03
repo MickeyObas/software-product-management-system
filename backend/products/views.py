@@ -2,10 +2,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 
-from .models import Product, Board
+from .models import Product
+from boards.models import Board
 from workspaces.models import Workspace
 from .serializers import (
     ProductSerialzer,
+)
+from boards.serializers import (
     BoardSerializer,
     ListSerializer
 )
@@ -28,17 +31,4 @@ def product_list(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def lists_for_board(request, pk):
-    try:
-        board = Board.objects.get(id=pk)
-    except Board.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    board_lists = Board.objects.filter(
-        board=board,
-        product__owner=request.user
-    )
 
-    serializer = ListSerializer(board_lists, many=True)
-    return Response(serializer.data)

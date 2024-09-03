@@ -14,5 +14,6 @@ urlpatterns = [
     # More Routes
     path('workspaces/', include('workspaces.urls')),
     path('products/', include('products.urls')),
-    path('users/', include('accounts.urls'))
+    path('users/', include('accounts.urls')),
+    path('boards/', include('boards.urls'))
 ]
