@@ -9,15 +9,22 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow-y: scroll;
 }
 
 .modal-content {
     background: #cfdefc;
-    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100%;
     border-radius: 8px;
     max-width: 70%;
     max-width: 800px;
     position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 13px;
+    padding-bottom: 17px;
 }
 
 /* Card Context  */
@@ -70,15 +77,178 @@
     display: flex;
 }
 
+.modal-content .card-context-section .description-section .fake-textarea{
+    background-color: #b5ceff;
+    width: 95%;
+    height: 60px;
+    padding-top: 12px;
+    padding-left: 8px;
+    margin-bottom: 15px;
+    color: rgba(0, 0, 0, 0.537);
+    cursor: pointer;
+}
+
+.modal-content .card-context-section .description-section .fake-textarea:hover{
+    background-color: #bfd5fd;
+}
+
+.modal-content .card-context-section .description-section{
+    
+}
+
+.modal-content .card-context-section .description-section textarea{
+    width: 95%;
+    resize: none;
+    min-height: 200px;
+    background: transparent;
+    background-color: #b5ceff;
+    padding-top: 12px;
+    padding-left: 8px;
+    border: none;
+    border-radius: 3px;
+    outline: 1.35px solid #7ea9ff;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.modal-content .card-context-section .description-section textarea:focus{
+    outline: 2px solid #7ea9ff;
+}
+
+.modal-content .description-section .description-menu{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.modal-content .card-context-section .description-header h5{
+    margin-bottom: 17px;
+}
+
+.modal-content .description-section .description-menu button{
+    border: none;
+    padding: 4px 4px;
+}
+
+.modal-content .description-section .description-menu .save{
+    margin-right: 6px;
+    background-color: #4b49ac;
+    color: whitesmoke;
+    border-radius: 4px;
+}
+
+.modal-content .description-section .description-menu .cancel{
+    background: transparent;
+}
+
+.modal-content .activity-section{
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.modal-content .card-context-section .activity-section .fake-textbox{
+    background-color: #b5ceff;
+    width: 95%;
+    height: 60px;
+    padding-top: 12px;
+    padding-left: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.537)
+}
+
+.modal-content .card-context-section .activity-section textarea{
+    width: 95%;
+    resize: none;
+    min-height: 100px;
+    background: transparent;
+    background-color: #b5ceff;
+    padding-top: 12px;
+    padding-left: 8px;
+    border: none;
+    border-radius: 3px;
+    outline: 1.35px solid #7ea9ff;
+    font-size: 14px;
+}
+
+.modal-content .card-context-section .activity-section textarea:focus{
+    outline: 2px solid #7ea9ff;
+}
+
+.modal-content .activity-section .activity-menu{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.modal-content .card-context-section .activity-header h5{
+    margin-bottom: 17px;
+}
+
+.modal-content .activity-section .activity-menu .save{
+    margin-right: 6px;
+    background-color: #4b49ac;
+    color: whitesmoke;
+    border-radius: 4px;
+    border: none;
+    padding: 4px 4px;
+    display: block;
+}
+
+.modal-content .activity-section .activity-menu label{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-top: 2.5px;
+}
+
+.modal-content .activity-section .activity-menu input[type=checkbox]{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-right: 5px;
+    background-color: #b5ceff;
+}
+
 .modal-content .card-context-container .main-content{
-    flex: 60%;
+    flex: 0 0 70%;
     display: flex;
     flex-direction: column;
-    max-width: 400px;
 }
 
 .modal-content .card-context-container .side-content{
-    flex: 30%;
+    flex: 0 0 25%;
+}
+
+.modal-content .card-context-container .side-content .side-content-add-header{
+    margin-bottom: 3px;
+}
+
+.modal-content .card-context-container .side-content .side-content-actions-header{
+    margin-top: 15px;
+    margin-bottom: 3px
+}
+
+.modal-content .card-context-container .side-content .card-sidebar{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content .side-content .card-sidebar .card-sidebar-tab{
+    width: 100%;
+    padding: 6px 12px;
+    color: black;
+    background-color: #b5ceff;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.modal-content .side-content .card-sidebar .card-sidebar-tab .icon{
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
 }
 
 .modal-close-button {
