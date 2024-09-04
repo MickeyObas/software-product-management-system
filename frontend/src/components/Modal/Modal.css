@@ -15,13 +15,14 @@
     background: #cfdefc;
     padding: 20px;
     border-radius: 8px;
-    width: 70%;
+    max-width: 70%;
     max-width: 800px;
     position: relative;
 }
 
 /* Card Context  */
 .modal-content .card-context-container{
+    max-width: 100%;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -73,6 +74,7 @@
     flex: 60%;
     display: flex;
     flex-direction: column;
+    max-width: 400px;
 }
 
 .modal-content .card-context-container .side-content{
