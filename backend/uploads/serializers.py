@@ -9,3 +9,4 @@ class ImageSerializer(serializers.ModelSerializer):
             'id',
             'image'
         ]
+

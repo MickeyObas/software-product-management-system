@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import Modal from "./Modal/Modal";
-import RichTextEditorWithAttachments from "./RichTextEditor";
 
 export default function Card({card}){
 
@@ -44,7 +43,6 @@ export default function Card({card}){
                                 <div className="icon"></div>
                                 <h5>Description</h5>
                             </div>
-                            <RichTextEditorWithAttachments/>
                         </div>
                     </div>
                     <div className="side-content">Side</div>
