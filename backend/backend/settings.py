@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "cards.apps.CardsConfig",
     "products.apps.ProductsConfig",
     "profiles.apps.ProfilesConfig",
+    "uploads.apps.UploadsConfig",
     "workspaces.apps.WorkspacesConfig"
 ]
 
