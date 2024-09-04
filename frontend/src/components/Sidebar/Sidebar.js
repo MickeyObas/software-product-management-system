@@ -76,7 +76,7 @@ function Sidebar() {
             {openWorkspaceId === workspace.id && (
                 <ul className="workspace-dropdown-menu">
                   <li>
-                  <NavLink to={`${workspace.id}/boards/`}><img src={board_icon} alt="board" className="default-icon"/>Boards</NavLink></li>
+                  <NavLink to={`/workspaces/${workspace.id}/`}><img src={board_icon} alt="board" className="default-icon"/>Boards</NavLink></li>
                   <li><NavLink to={`${workspace.id}/members/`}><img src={members_icon} alt="members"/>Members</NavLink></li>
                   <li><NavLink to={`${workspace.id}/settings/`}><img src={settings_icon} alt="settings"/>Settings</NavLink></li>
                 </ul>

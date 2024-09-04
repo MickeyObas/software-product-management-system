@@ -71,6 +71,7 @@
     height: 80%;
     padding-bottom: 10px;
     padding-top: 10px;
+    user-select: none;
 }
 
 .board-content .board-container .board .list-item{

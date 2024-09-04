@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import './styles.css';
 import { fetchWithAuth } from "../../components/utils";
@@ -74,29 +74,21 @@ export default function Workspace(){
                 </div>
             </div>
             <hr className="dividing-line"></hr>
-            <div style={{
-                "display": "flex",
-                "justifyContent": "space-between",
-                "alignItems": "center"
-                }}>
-                <h3 style={{"marginTop": "12px"}}>Boards</h3>
-                <input type="text" placeholder="Search boards" style={{
-                    "height": "35px",
-                    "fontSize": "14px",
-                    "border": "1.5px solid white",
-                    "outline": "2px solid lightblue",
-                    "padding": "6px 8px",
-                    "background": "transparent"
-                }}/>
+            <div className="workspace-boards-container">
+                <h3>Boards</h3>
+                <input type="text" placeholder="Search boards"/>
             </div>
             <div className="workspace-boards-section">
                 <div className="board">
                     <p>Create New Board</p>
                 </div>
                 {boardsData && boardsData.map((board, idx) => (
-                    <div className="board">
+                    <NavLink
+                    className="board"
+                    to={`/boards/${board.id}/${board.title}/`}
+                    >
                         <p>{board.title}</p>
-                    </div>
+                    </NavLink>
                 ))}
             </div>
             <div className="view-closed-boards-button">

@@ -11,7 +11,22 @@ from .models import (
     CardAttachmentItem
 )
 
-admin.site.register(Card)
+class CardModelAdmin(admin.ModelAdmin):
+    def card_board(self, obj):
+        return obj.list.board
+    
+    def card_workspace(self, obj):
+        return obj.list.board.product.workspace
+    
+
+    list_display = [
+        "title",
+        "list",
+        "card_board",
+        "card_workspace"
+    ]
+
+admin.site.register(Card, CardModelAdmin)
 admin.site.register(Label)
 admin.site.register(Checklist)
 admin.site.register(CardDateItem)

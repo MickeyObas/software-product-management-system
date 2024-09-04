@@ -48,7 +48,6 @@ export default function Board(){
                 setError('An error occurred while fetching lists.');
             } finally {
                 setLoading(false);
-                console.log(lists);
             }
         };
 
@@ -72,7 +71,7 @@ export default function Board(){
                 <ol className="board">
                     {lists && lists.map((list, idx) => (
                         <List key={idx}
-                        listId={idx}
+                        listId={list.id}
                         setIsAddingCard={setIsAddingCard}
                         isAddingCard={isAddingCard}
                         cards={list.cards}

@@ -51,6 +51,25 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+.workspace-content .workspace-boards-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.workspace-content .workspace-boards-container h3{
+    margin-top: 12px;
+}
+
+.workspace-content .workspace-boards-container input{
+    height: 35px;
+    font-size: 14px;
+    border: 1.5px solid white;
+    outline: 2px solid lightblue;
+    padding: 6px 8px;
+    background: transparent;
+}
+
 .workspace-content .workspace-boards-section{
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -77,6 +96,8 @@
     justify-content: start;
     font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .workspace-content .workspace-boards-section .board:hover{
