@@ -20,10 +20,21 @@ class CardModelAdmin(admin.ModelAdmin):
     
 
     list_display = [
+        "id",
         "title",
         "list",
         "card_board",
         "card_workspace"
+    ]
+
+class CardCommentItemModelAdmin(admin.ModelAdmin):
+    def card_id(self, obj):
+        return obj.card.id
+    
+    list_display = [
+        'user',
+        'card_id',
+        'text'
     ]
 
 admin.site.register(Card, CardModelAdmin)
@@ -32,5 +43,5 @@ admin.site.register(Checklist)
 admin.site.register(CardDateItem)
 admin.site.register(CardCoverItem)
 admin.site.register(ChecklistItem)
-admin.site.register(CardCommentItem)
+admin.site.register(CardCommentItem, CardCommentItemModelAdmin)
 admin.site.register(CardAttachmentItem)

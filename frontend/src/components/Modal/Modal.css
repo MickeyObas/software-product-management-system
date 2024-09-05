@@ -16,15 +16,20 @@
     background: #cfdefc;
     margin-top: 10px;
     margin-bottom: 10px;
-    height: 100%;
+    min-height: 100%;
     border-radius: 8px;
     max-width: 70%;
     max-width: 800px;
     position: relative;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 13px;
+    padding-top: 30px;
     padding-bottom: 17px;
+    position: relative;
+}
+
+.modal-content.expand{
+    padding-top: 400px;
 }
 
 /* Card Context  */
@@ -40,6 +45,19 @@
     display: flex;
     align-items: start;
     margin-bottom: 15px;
+}
+
+.modal-content .card-context-container .card-context-header .name{
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+.modal-content .card-context-container .card-context-header .list-name{
+    margin-bottom: 20px;
+}
+
+.modal-content .card-context-container .card-context-header small{
+    text-decoration: underline;
 }
 
 .modal-content .card-context-header .icon{
@@ -75,6 +93,19 @@
 
 .modal-content .card-context-section{
     display: flex;
+    gap: 20px;
+}
+
+.modal-content .card-context-section .description-section .description-body{
+    font-size: 14px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    max-width: 500px;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    position: relative;
+    box-sizing: border-box;
+    overflow-x: scroll;
 }
 
 .modal-content .card-context-section .description-section .fake-textarea{
@@ -148,7 +179,7 @@
 .modal-content .card-context-section .activity-section .fake-textbox{
     background-color: #b5ceff;
     width: 95%;
-    height: 60px;
+    height: 70px;
     padding-top: 12px;
     padding-left: 8px;
     margin-bottom: 15px;
@@ -178,6 +209,71 @@
     display: flex;
     align-items: center;
     height: 50px;
+    padding-left: 30px;
+}
+
+.modal-content .activity-section-feed-container{
+    display: flex;
+}
+
+.modal-content .activity-feed{
+    width: 100%;
+    position: relative;
+}
+
+.modal-content .activity-feed .activity-feed-item{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.modal-content .activity-feed .activity-feed-item .icon{
+    background-color: yellow;
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.modal-content .activity-feed .activity-feed-item .comment{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-content .activity-feed-item .comment .user-period{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+}
+
+.modal-content .activity-feed-item .comment .user-period .user-time-posted{
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.modal-content .activity-feed-item .comment .user-content{
+    background-color: #7ea9ff;
+    width: 100%;
+    padding: 4.5px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.modal-content .activity-section .user-menu{
+    gap: 6px;
+}
+
+.modal-content .activity-section .user-menu a{
+    color: black;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.modal-content .activity-section img{
+    height: 25px;
+    margin-right: 10px;
 }
 
 .modal-content .card-context-section .activity-header h5{

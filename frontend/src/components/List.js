@@ -11,6 +11,7 @@ import Card from "./Card";
 
 export default function List({
     listId,
+    list,
     setIsAddingCard,
     isAddingCard,
 }){
@@ -96,7 +97,10 @@ export default function List({
         </div>
         <ol className="list-cards-container">
             {cards && cards.map((card, idx) => (
-                <Card card={card} />
+                <Card 
+                card={card}
+                listTitle={list.title}    
+                />
             ))}
             {(isAddingCard.status && isAddingCard.index === listId) ? (
             <li className="add-card-item">

@@ -4,6 +4,7 @@ import Modal from "./Modal/Modal";
 import CardDescription from "./CardDescription";
 
 import member_icon from './assets/user.png';
+import user_icon from './assets/profile-user.png';
 import label_icon from './assets/price-tag.png';
 import list_icon from './assets/to-do-list.png';
 import attachment_icon from './assets/attach-file.png';
@@ -11,12 +12,25 @@ import cover_icon from './assets/background.png';
 import share_icon from './assets/share.png';
 import archive_icon from './assets/folder.png';
 import delete_icon from './assets/bin.png';
+import { fetchWithAuth } from "./utils";
 
-export default function Card({card}){
+export default function Card({card, listTitle}){
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditingDescription, setIsEditingDescription] = useState(false);
     const [isEditingComment, setIsEditingComment] = useState(false);
+
+    // Card Values
+    const [description, setDescription] = useState(card.description ? card.description : "");
+    const [newCommentContent, setNewCommentContent] = useState('');
+
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+    }
+
+    const handleCommentChange = (e) => {
+        setNewCommentContent(e.target.value);
+    }
 
     const handleCardClick = () => {
         setIsModalOpen(true);
@@ -38,7 +52,50 @@ export default function Card({card}){
 
     const handleSaveDescriptionClick = () => {
         setIsEditingDescription(false);
+        handleSaveDescription();
     }
+
+    const handleSaveDescription = async () => {
+        try {
+            const response = await fetchWithAuth(`http://localhost:8000/api/cards/${card.id}/description/`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    'description': description
+                })
+            });
+            if(response.ok){
+                const data = await response.json();
+                console.log(data);
+                // Set description?
+            } else{
+                console.log("Error, failed to change description.");
+            }
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    const handleSaveComment = async () => {
+        try {
+            const response = await fetchWithAuth(`http://localhost:8000/api/cards/${card.id}/comments/`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    'comment': newCommentContent
+                })
+            });
+            if(response.ok){
+                const data = await response.json();
+                console.log(data);
+                // Set comment?
+                setNewCommentContent('');
+            } else{
+                console.log("Error, failed to save comment.");
+            }
+        } catch(err){
+            console.log(err);
+        }
+    }
+
 
     const handleCancelClick = () => {
         setIsEditingDescription(false);
@@ -46,6 +103,7 @@ export default function Card({card}){
 
     const handleSaveCommentClick = () => {
         setIsEditingComment(false);
+        handleSaveComment();
     }
 
     return (
@@ -58,13 +116,15 @@ export default function Card({card}){
         <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        isEditingComment={isEditingComment}
+        isEditingDescription={isEditingDescription}
         >
             <div className="card-context-container">
                 <div className="card-context-header">
                     <span className="icon"></span>
                     <div className="name-bar">
-                        <span className="name">Card Name</span>
-                        <span className="list-name">in List (listname)</span>
+                        <span className="name">{card.title}</span>
+                        <span className="list-name">in list <small>{listTitle}</small></span>
                     </div>
                     <button
                     className="card-modal-close-button"
@@ -78,15 +138,27 @@ export default function Card({card}){
                                 <div className="icon"></div>
                                 <h5>Description</h5>
                             </div>
-                            {!isEditingDescription ? (
+                            {(!isEditingDescription && !description) ? (
                                 <div
                                 className="fake-textarea"
                                 onClick={handleFakeTextAreaClick}
                                 >
                                     Add a more detailed description...
                                 </div>
+                            ) : (!isEditingDescription && description) ? (
+                                !isEditingDescription && (
+                                    <div
+                                    className="description-body"
+                                    onClick={() => setIsEditingDescription(true)}>
+                                    {description}
+                                    </div>
+                                )
                             ) : (
-                                <textarea placeholder="Write a description"></textarea>
+                                <textarea
+                                value={description}
+                                placeholder="Write a description"
+                                onChange={handleDescriptionChange}
+                                ></textarea>
                             )}
                             {isEditingDescription && (
                                 <div className="description-menu">
@@ -106,16 +178,25 @@ export default function Card({card}){
                                 <div className="icon"></div>
                                 <h5>Activity</h5>
                             </div>
-                            {!isEditingComment ? (
-                                <div
-                                    className="fake-textbox"
-                                    onClick={handleFakeTextBoxClick}
-                                    >
-                                    Write a comment...
+                                <div className="activity-section-feed-container">
+                                    <img
+                                     src={user_icon}
+                                     alt="member-icon"   
+                                    />
+                                    {!isEditingComment ? (<div
+                                        className="fake-textbox"
+                                        onClick={handleFakeTextBoxClick}
+                                        >
+                                        Write a comment...
+                                    </div>) : (
+                                        <textarea
+                                        placeholder="Write a comment"
+                                        onChange={handleCommentChange}
+                                        value={newCommentContent}
+                                        ></textarea> 
+                                    )}
                                 </div>
-                            ) : (
-                                <textarea placeholder="Write a comment"></textarea>           
-                            )}
+                                
                             {isEditingComment && (
                                 <div className="activity-menu">
                                     <button
@@ -125,6 +206,64 @@ export default function Card({card}){
                                     <label htmlFor="isWatching"><input name="isWatching" type="checkbox"/>Watch</label>
                                 </div>     
                             )}
+                            <div className="activity-feed">
+                                <div className="activity-feed-item">
+                                    <div className="icon"></div>
+                                    <div className="comment">
+                                        <div className="user-period">
+                                            <div className="user-name">MickeyGoo</div>
+                                            <div className="user-time-posted">20 minutes ago</div>
+                                        </div>
+                                        <div className="user-content">g</div>
+                                        <div className="user-menu">
+                                            <a href="">Edit</a>
+                                            <a href="">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="activity-feed-item">
+                                    <div className="icon"></div>
+                                    <div className="comment">
+                                        <div className="user-period">
+                                            <div className="user-name">MickeyGoo</div>
+                                            <div className="user-time-posted">20 minutes ago</div>
+                                        </div>
+                                        <div className="user-content">g</div>
+                                        <div className="user-menu">
+                                            <a href="">Edit</a>
+                                            <a href="">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="activity-feed-item">
+                                    <div className="icon"></div>
+                                    <div className="comment">
+                                        <div className="user-period">
+                                            <div className="user-name">MickeyGoo</div>
+                                            <div className="user-time-posted">20 minutes ago</div>
+                                        </div>
+                                        <div className="user-content">g</div>
+                                        <div className="user-menu">
+                                            <a href="">Edit</a>
+                                            <a href="">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="activity-feed-item">
+                                    <div className="icon"></div>
+                                    <div className="comment">
+                                        <div className="user-period">
+                                            <div className="user-name">MickeyGoo</div>
+                                            <div className="user-time-posted">20 minutes ago</div>
+                                        </div>
+                                        <div className="user-content">g</div>
+                                        <div className="user-menu">
+                                            <a href="">Edit</a>
+                                            <a href="">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="side-content">

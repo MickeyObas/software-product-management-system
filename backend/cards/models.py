@@ -40,13 +40,12 @@ class CardAttachmentItem(models.Model):
     file_type = models.CharField(max_length=50, choices=[('image', 'Image'), ('document', 'Document')])
     created_at = models.DateTimeField(auto_now_add=True)
     
-
 class CardCoverItem(models.Model):
     color = models.CharField(max_length=50, null=True)
     image = models.ImageField(upload_to='uploads/')
 
 class CardCommentItem(models.Model):
-    card = models.ForeignKey('cards.Card', on_delete=models.CASCADE)
+    card = models.ForeignKey('cards.Card', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

@@ -72,6 +72,7 @@ export default function Board(){
                     {lists && lists.map((list, idx) => (
                         <List key={idx}
                         listId={list.id}
+                        list={list}
                         setIsAddingCard={setIsAddingCard}
                         isAddingCard={isAddingCard}
                         cards={list.cards}
