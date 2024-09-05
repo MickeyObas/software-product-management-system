@@ -31,7 +31,7 @@ export default function Card({card, listTitle}){
             <li className="list-card" onClick={handleCardClick}>
                 {card.title}
             </li>
-            <Modal card={card} isOpen={isModalOpen} onClose={handleCloseModal}
+            <Modal card={card} isOpen={isModalOpen} onClose={handleCloseModal} setIsModalOpen={setIsModalOpen}
             listTitle={listTitle}>   
             </Modal>
         </div> 

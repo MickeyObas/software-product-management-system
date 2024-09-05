@@ -20,6 +20,7 @@ export default function Modal({
   isOpen,
   onClose,
   listTitle,
+  setIsModalOpen,
   children }) {
   
       // Card Values
@@ -35,6 +36,7 @@ export default function Modal({
       }
   
       const handleCloseModal = () => {
+        setIsModalOpen(false);
         setIsEditingComment(false);
         setIsEditingDescription(false);
     };
@@ -59,7 +61,7 @@ export default function Modal({
 
 
       useEffect(() => {
-        const fetchCardDetails = async () => {
+        const fetchCommentDetails = async () => {
           try {
             const commentsResponse = await fetchWithAuth(`http://localhost:8000/api/cards/${card.id}/comments/`);
             const commentsData = await commentsResponse.json();
@@ -69,7 +71,7 @@ export default function Modal({
           }
         };
     
-        fetchCardDetails();
+        fetchCommentDetails();
       }, [card.id]);
 
   
@@ -106,6 +108,10 @@ export default function Modal({
                   console.log(data);
                   // Set comment?
                   setNewCommentContent('');
+                  setCardCommentsData((cd) => ([
+                    data,
+                    ...cd
+                  ]))
               } else{
                   console.log("Error, failed to save comment.");
               }
