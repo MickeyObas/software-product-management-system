@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from accounts.serializers import UserSerializer
+
 from .models import (
     Card,
     CardCommentItem
@@ -22,6 +24,7 @@ class CardSerializer(serializers.ModelSerializer):
 
 
 class CardCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = CardCommentItem
         fields = [

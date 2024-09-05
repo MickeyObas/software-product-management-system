@@ -219,6 +219,8 @@
 .modal-content .activity-feed{
     width: 100%;
     position: relative;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
 .modal-content .activity-feed .activity-feed-item{

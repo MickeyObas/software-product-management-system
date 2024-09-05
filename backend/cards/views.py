@@ -70,7 +70,7 @@ def card_comment_list_or_create(request, card_id):
     
     # Getting a card's comments
     if request.method == 'GET':
-        card_comments = card.comments.all()
+        card_comments = card.comments.order_by('-created_at')
 
         serializer = CardCommentSerializer(
             card_comments,

@@ -61,3 +61,28 @@ export default function ProtectedRoutes(){
     )
 }
  
+
+export function timeAgo(timestamp) {
+    const now = new Date();
+    const past = new Date(timestamp);
+    const secondsAgo = Math.floor((now - past) / 1000);
+  
+    if (secondsAgo < 60) {
+      const unit = secondsAgo === 1 ? 'second' : 'seconds';
+      return `${secondsAgo} ${unit} ago`;
+    } else if (secondsAgo < 3600) {
+      const minutesAgo = Math.floor(secondsAgo / 60);
+      const unit = minutesAgo === 1 ? 'minute' : 'minutes';
+      return `${minutesAgo} ${unit} ago`;
+    } else if (secondsAgo < 86400) {
+      const hoursAgo = Math.floor(secondsAgo / 3600);
+      const unit = hoursAgo === 1 ? 'hour' : 'hours';
+      return `${hoursAgo} ${unit} ago`;
+    } else {
+      const daysAgo = Math.floor(secondsAgo / 86400);
+      const unit = daysAgo === 1 ? 'day' : 'days';
+      return `${daysAgo} ${unit} ago`;
+    }
+  }
+  
+  
