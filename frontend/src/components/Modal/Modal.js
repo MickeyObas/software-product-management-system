@@ -30,6 +30,7 @@ export default function Modal({
 
       const [isEditingDescription, setIsEditingDescription] = useState(false);
       const [isEditingComment, setIsEditingComment] = useState(false);
+
   
       const handleDescriptionChange = (e) => {
           setDescription(e.target.value);
@@ -41,10 +42,27 @@ export default function Modal({
         setIsEditingDescription(false);
     };
 
-
       const handleCommentChange = (e) => {
           setNewCommentContent(e.target.value);
       }
+
+      const handleCommentDelete = (commentId) => {
+        console.log("Deleted, ", commentId);
+        setCardCommentsData((cd) => (
+            cd.filter((comment) => comment.id !== commentId)
+        ));
+      };
+
+      const handleCreatedCommentEdit = (commentId, commentText) => {
+        setCardCommentsData((cd) => 
+          cd.map((comment) => {
+            if (commentId === comment.id) {
+              return { ...comment, text: commentText };  // Update the comment's text
+            } 
+            return comment;  // Return other comments as they are
+          })
+        );
+      };
   
       const handleFakeTextAreaClick = () => {
           setIsEditingDescription(true);
@@ -59,6 +77,15 @@ export default function Modal({
           handleSaveDescription();
       }
 
+      const fetchCommentDetails = async () => {
+        try {
+          const commentsResponse = await fetchWithAuth(`http://localhost:8000/api/cards/${card.id}/comments/`);
+          const commentsData = await commentsResponse.json();
+          setCardCommentsData(commentsData);
+        } catch (error) {
+          console.error('Error fetching card comments:', error);
+        }
+      };
 
       useEffect(() => {
         const fetchCommentDetails = async () => {
@@ -223,7 +250,11 @@ export default function Modal({
                             )}
                             <div className="activity-feed">
                             {(cardCommentsData && cardCommentsData.map((cardComment, idx) => (
-                              <CardComment key={idx} comment={cardComment}/>
+                              <CardComment
+                                cardId={card.id}
+                                onDelete={handleCommentDelete}
+                                onEdit={handleCreatedCommentEdit}
+                              key={idx} comment={cardComment}/>
                             )))}
                             </div>
                         </div>

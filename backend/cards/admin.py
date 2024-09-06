@@ -32,6 +32,7 @@ class CardCommentItemModelAdmin(admin.ModelAdmin):
         return obj.card.id
     
     list_display = [
+        'id',
         'user',
         'card_id',
         'text'

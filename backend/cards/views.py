@@ -54,6 +54,8 @@ def update_card_description(request, pk):
         data=data
         )
     
+    print(data)
+
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -61,6 +63,7 @@ def update_card_description(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# -------------COMMENT ENDPOINTS-------------------
 @api_view(['GET', 'POST'])
 def card_comment_list_or_create(request, card_id):
     try:
@@ -68,7 +71,6 @@ def card_comment_list_or_create(request, card_id):
     except Card.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    # Getting a card's comments
     if request.method == 'GET':
         card_comments = card.comments.order_by('-created_at')
 
@@ -81,7 +83,6 @@ def card_comment_list_or_create(request, card_id):
             return Response(serializer.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
-    # Adding a comment to a card
     if request.method == 'POST':
         data = request.data
         user = request.user
@@ -101,6 +102,42 @@ def card_comment_list_or_create(request, card_id):
         serializer = CardCommentSerializer(new_card_comment)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['DELETE', 'PATCH'])
+def card_comment_update_or_delete(request, card_id, comment_id):
+    try:
+        card = Card.objects.get(id=card_id)
+        comment = CardCommentItem.objects.get(
+            id=comment_id,
+            user=request.user
+        )
+    except Card.DoesNotExist or CardCommentItem.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == "DELETE":
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    if request.method == "PATCH":
+        data = json.loads(request.body)
+    
+        serializer = CardCommentSerializer(
+            comment,
+            partial=True,
+            data=data
+        )
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+    
+
 
 
     

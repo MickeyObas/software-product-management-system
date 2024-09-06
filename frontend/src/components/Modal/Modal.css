@@ -110,7 +110,7 @@
 
 .modal-content .card-context-section .description-section .fake-textarea{
     background-color: #b5ceff;
-    width: 95%;
+    width: 100%;
     height: 60px;
     padding-top: 12px;
     padding-left: 8px;
@@ -225,6 +225,7 @@
     position: relative;
     max-height: 400px;
     overflow-y: scroll;
+    padding-right: 15px;
 }
 
 .modal-content .activity-feed .activity-feed-item{
@@ -267,14 +268,63 @@
     margin-bottom: 3px;
 }
 
+.modal-content .activity-feed-item .comment .user-content-input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input-container button{
+    border: none;
+    border-radius: 4px;
+    padding: 3px 4px;
+    margin-right: 5px;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input{
+    font-size: 12px;
+    height: 50px;
+    background-color: #b5ceff;
+    border: none;
+    border-radius: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input:focus{
+    outline: 1.2px solid white;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input-container .save{
+    background-color: #4b49ac;
+    color: white;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input-container .save:hover{
+    background-color: #6968ae;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input-container .discard{
+    background-color: #b5ceff;
+    color: black;
+}
+
+.modal-content .activity-feed-item .comment .user-content-input-container .discard:hover{
+    background-color: #c0d3fa;
+}
+
 .modal-content .activity-section .user-menu{
     gap: 6px;
 }
 
-.modal-content .activity-section .user-menu a{
+.modal-content .activity-section .user-menu button{
     color: black;
     font-size: 12px;
     margin-right: 4px;
+    background: none;
+    border: none;
+    text-decoration: underline;
 }
 
 .modal-content .activity-section img{
