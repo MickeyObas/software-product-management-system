@@ -85,4 +85,9 @@ export function timeAgo(timestamp) {
     }
   }
   
-  
+
+export const isValidUrl = (url) => {
+    // Regular expression for validating URLs
+    const urlPattern = /^(https?:\/\/)?([\w\d\-]+\.)+[\w\d\-]+(\/[\w\d\-\.]+)*\/?$/;
+    return urlPattern.test(url)
+}

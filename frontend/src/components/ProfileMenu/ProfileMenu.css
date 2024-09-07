@@ -1,0 +1,69 @@
+.menu-modal {
+position: fixed;
+top: 45px;
+right: 0;
+width: 300px;
+height: 100vh;
+background-color: #c7dbff;
+box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+z-index: 1000;
+padding-top: 30px;
+}
+
+.menu-modal .links-container hr{
+    margin-left: 14px;
+    margin-right: 14px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+  
+.menu-modal .account-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.menu-modal .just-flex-bruh{
+    display: flex;
+    gap: 10px;
+}
+
+.menu-modal .account-container .icon{
+    width: 45px;
+    height: 45px;
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+.menu-modal .name-bar{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-modal .name-bar .username{
+    font-size: 15px;
+}
+
+.menu-modal .name-bar .email{
+    font-size: 12px;
+}
+
+.menu-modal .links-container{
+    margin-top: 28px;
+}
+
+.menu-modal .links-container a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 4px;
+    padding: 8px 4px;
+    width: 100%;
+    padding-left: 25px;
+
+}
+
+.menu-modal .links-container a:hover{
+    background-color: #d9e6ff;
+}

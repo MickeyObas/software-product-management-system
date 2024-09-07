@@ -154,6 +154,54 @@
     color: white;
 }
 
+/* ------------------------ */
+.navigation-bar .products-dropdown-tab{
+    width: 100%;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    color: white
+}
+
+.navigation-bar .products-dropdown-tab:first-of-type,
+.navigation-bar .products-dropdown-tab:last-of-type {
+    margin-bottom: 0;
+}
+
+.navigation-bar .products-dropdown-tab .title-text{
+    color: white;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+    opacity: 80%;
+}
+
+.navigation-bar .products-dropdown-sub-tab{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.navigation-bar .products-dropdown-sub-tab:last-child{
+    margin-bottom: 0px;
+}
+
+.navigation-bar .products-dropdown-sub-tab .icon{
+    background-color: lightblue;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.navigation-bar .products-dropdown-sub-tab .title a{
+    font-size: 14px;
+    color: white;
+}
+
+/* ------------------------------- */
+
 .navigation-bar .recent-dropdown-tab{
     display: flex;
     color: white;

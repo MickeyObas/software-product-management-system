@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { UserProvider } from './components/UserContext';
+import { WorkspaceProvider } from './components/WorkspaceContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Components 
@@ -19,6 +20,7 @@ import DashboardLayout from './layouts/DashboardLayout/DashboardLayout';
 
 // Utils
 import ProtectedRoutes from './components/utils';
+import AddProduct from './pages/AddProduct';
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
 return (
   <div className="containerr">
   <UserProvider>
+  <WorkspaceProvider>
   <Router>
       <Routes>
  
@@ -44,6 +47,7 @@ return (
             <Route path='contact' element={<Contact />} />
             <Route path='services' element={<Services />} />
             <Route path='workspaces/:workspaceId' element={<Workspace />}/>
+            <Route path='workspaces/add-product/' element={<AddProduct />} />
           </Route>
         </Route>
 
@@ -53,6 +57,7 @@ return (
 
       </Routes>
     </Router>
+    </WorkspaceProvider>
   </UserProvider>
     
   </div>
