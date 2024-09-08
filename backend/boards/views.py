@@ -9,8 +9,10 @@ from .serializers import (
     ListSerializer,
     CardSerializer
 )
+from activities.utils import log_activity
 
 import json
+
 
 
 @api_view(['GET'])
@@ -69,6 +71,21 @@ def add_new_card_to_list(request, pk, list_id):
         )
 
         new_card.save()
+
+        extra_data = {
+            "board_title": new_card.list.board.title,
+            "workspace_title": new_card.list.board.product.workspace.title,
+            "list_title": new_card.list.title
+        }
+
+        log_activity(
+            user=request.user,
+            obj=new_card,
+            extra_data=extra_data,
+            action_type='create',
+            activity_type='card_created',
+            description=f"Created card: {new_card.title}"
+        )
 
         serializer = CardSerializer(new_card)
 

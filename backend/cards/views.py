@@ -19,7 +19,6 @@ import json
 def add_new_card_to_list(request, list_id):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
         try:
             list = List.objects.get(
                 id=list_id
@@ -27,27 +26,20 @@ def add_new_card_to_list(request, list_id):
         except List.DoesNotExist:
             return Response(status=status.HTTP_404_DOES_NOT_EXIST)
         
-        print("Pre-pre card creation")
-        
         new_card = Card.objects.create(
             list=list,
             title=data['title']
         )
 
-        print("Card is about to be created")
-
         new_card.save()
-
-        print("Card has been created")
 
         log_activity(
             user=request.user,
             obj=new_card,
-            action_type='created',
+            action_type='create',
             activity_type='card_created',
             description=f"Created card: {new_card.title}"
         )
-        print("This shit has gotta been logged")
 
         serializer = ListSerializer(list)
 
@@ -70,8 +62,6 @@ def update_card_description(request, pk):
         data=data
         )
     
-    print(data)
-
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)

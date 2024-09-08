@@ -13,6 +13,7 @@ class Activity(models.Model):
     object = GenericForeignKey('content_type', 'object_id')
 
     object_data = models.JSONField()  # To store all object data
+    extra_data = models.JSONField(blank=True, null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=True)

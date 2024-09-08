@@ -19,6 +19,7 @@ const ActivityFeed = () => {
 
   const renderActivity = (activity) => {
     const objectData = JSON.parse(activity.object_data)[0]?.fields || {};
+    const extraData = activity.extra_data ? JSON.parse(JSON.stringify(activity.extra_data)) : {};
     console.log(objectData);
     switch (activity.activity_type) {
       case 'board_created':
@@ -71,6 +72,12 @@ const ActivityFeed = () => {
                             <div className='time-ago'>3 hours ago</div>
                         </div>
                     </div>
+                </div>
+                <div className='activity-footer'>
+                  <div className='card-bodyy'>
+                    <h5>{extraData.board_title} - {extraData.list_title}</h5>
+                    <h4>{extraData.workspace_title}</h4>
+                  </div>
                 </div>
             </div>
         );

@@ -5,15 +5,6 @@
     overflow-y: auto;
 }
 
-.activity-item{
-    padding-bottom: 10px;
-    background-color: #cfdffc;
-    width: 80%;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 .workspace-created-activity{
     height: 100px;
     width: 80%;
@@ -135,8 +126,7 @@
 
 /* CARD */
 .card-created-activity{
-    height: 100px;
-    outline: 1.2px solid lightgreen;
+    height: 200px;
     width: 80%;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -144,8 +134,8 @@
 }
 
 .card-created-activity .activity-header{
-    height: 40%;
-    background-color: #b9d1fd;
+    height: 22%;
+    background-color: lightsalmon !important;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -183,6 +173,7 @@
     font-size: 14px;
 }
 
+
 .card-created-activity .username{
     font-weight: bold;
 }
@@ -191,4 +182,34 @@
 .card-created-activity .time-ago{
     font-size: 12px;
     opacity: 0.7;
+}
+
+.card-created-activity .activity-footer{
+    height: 55%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-created-activity .activity-footer .card-bodyy{
+    display: flex;
+    height: 75%;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-created-activity .activity-footer .card-bodyy h5{
+    font-size: 12px;
+    display: flex;
+    margin: 0px;
+}
+
+.card-created-activity .activity-footer .card-bodyy h4{
+    font-size: 14px;
+    margin: 0px;
 }
