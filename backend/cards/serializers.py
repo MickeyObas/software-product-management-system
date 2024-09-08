@@ -9,11 +9,22 @@ from .models import (
 
 
 class CardSerializer(serializers.ModelSerializer):
+    list_name = serializers.SerializerMethodField()
+    workspace_name = serializers.SerializerMethodField()
+
+    def get_list_name(self, obj):
+        return obj.list.title
+
+    def get_workspace_name(Self, obj):
+        return obj.list.board.product.workspace.title
+    
     class Meta:
         model = Card 
         fields = [
             'id',
             'list',
+            'list_name',
+            'workspace_name',
             'title',
             'is_watched', 
             'description',
@@ -33,3 +44,5 @@ class CardCommentSerializer(serializers.ModelSerializer):
             'text',
             'created_at'
         ]
+
+

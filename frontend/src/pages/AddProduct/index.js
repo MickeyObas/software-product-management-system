@@ -5,11 +5,13 @@ import { fetchWithAuth } from '../../components/utils';
 import { isValidUrl } from '../../components/utils';
 import { useWorkspace } from '../../components/WorkspaceContext';
 import { UserContext } from '../../components/UserContext';
+import { useProduct } from '../../components/ProductContext';
 
 const AddProduct = () => {
 
   const { currentWorkspace } = useWorkspace();
   const { user, loading } = useContext(UserContext);
+  const { currentProduct, setCurrentProduct } = useProduct();
 
   const navigate = useNavigate();
 
@@ -87,7 +89,7 @@ const validateForm = () => {
         body: JSON.stringify(productData)
       })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => setCurrentProduct(data))
       .then(() => navigate(`/${user.email}/boards/`))
       .catch((err) => console.log("Whoops, an error occured: ", err))
 

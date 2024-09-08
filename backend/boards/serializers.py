@@ -4,9 +4,11 @@ from .models import Board, List
 from cards.serializers import (
     CardSerializer
 )
+from products.serializers import ProductSerialzer
 
 
 class BoardSerializer(serializers.ModelSerializer):
+    product = ProductSerialzer()
     class Meta:
         model = Board
         fields = [

@@ -87,7 +87,7 @@ export default function Workspace(){
                     className="board"
                     to={`/boards/${board.id}/${board.title}/`}
                     >
-                        <p>{board.title}</p>
+                        <p><span style={{fontWeight: "bold"}}>{board.product.title}</span>{` - ${board.title}`}</p>
                     </NavLink>
                 ))}
             </div>

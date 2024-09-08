@@ -16,6 +16,7 @@ from profiles.models import (
 @api_view(['GET'])
 def user_detail(request):
     user = request.user
+    print(user)
     serializer = UserSerializer(user)
     print(serializer.data)
     return Response(serializer.data)

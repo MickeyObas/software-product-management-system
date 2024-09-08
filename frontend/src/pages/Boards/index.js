@@ -4,10 +4,12 @@ import clock_icon from '../../components/assets/clock.png';
 import { fetchWithAuth } from "../../components/utils";
 import { NavLink, useParams } from "react-router-dom";
 import Board from '../Board';
+import { useProduct } from "../../components/ProductContext";
 
 export default function Boards(){
 
     const [workspaces, setWorkspaces] = useState(null);
+    const { currentProduct, setCurrentProduct } = useProduct();
 
     useEffect(() => {
         const fetchWorkspacesAndBoards = async () => {
@@ -57,12 +59,12 @@ export default function Boards(){
                         </div>
                     </div>
                     <div className="workspace-boards-section">
-                        {workspace.boards && workspace.boards.map((board, idx) => (
+                        {workspace.boards && workspace.boards.filter((board) => board.product.id === currentProduct.id).map((board, idx) => (
                             <NavLink
                             className='workspace-board-tab-link'
                             to={`/boards/${board.id}/${board.title}`}
                             >
-                            <div className="workspace-board-tab">{board.title}</div>
+                            <div className="workspace-board-tab">{`${board.product.title} - ${board.title}`}</div>
                             </NavLink>
                         ))}
                         <NavLink className='workspace-board-tab-link create'>Create New Board</NavLink>

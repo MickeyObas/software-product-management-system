@@ -4,11 +4,15 @@ from .models import Board, List
 
 
 class ListModelAdmin(admin.ModelAdmin):
+    def list_workspace(self, obj):
+        return obj.board.product.workspace
+    
     list_display = [
         'id',
         'board',
         'title', 
-        'order'
+        'order',
+        'list_workspace'
     ]
 
 class BoardModelAdmin(admin.ModelAdmin):

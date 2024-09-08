@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Local apps
     "api.apps.ApiConfig",
     "accounts.apps.AccountsConfig",
+    "activities.apps.ActivitiesConfig",
     "boards.apps.BoardsConfig",
     "cards.apps.CardsConfig",
     "products.apps.ProductsConfig",

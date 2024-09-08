@@ -9,11 +9,16 @@ import settings_icon from '../assets/settings.png';
 import members_icon from '../assets/meeting.png';
 import board_icon from '../assets/blackboard.png';
 import board_icon_white from '../assets/blackboard-white.png';
+import down_arrow from '../assets/down-arrow.png';
+import down_arrow_white from '../assets/down-arrow-white.png';
+import up_arrow from '../assets/upload.png';
+import { useWorkspace } from "../WorkspaceContext";
 
 function Sidebar() {
 
   const navigate = useNavigate();
   const {user, loading} = useContext(UserContext);
+  const {currentWorkspace} = useWorkspace();
 
   const [workspaces, setWorkspaces] = useState([]);
   const [openWorkspaceId, setOpenWorkspaceId] = useState(null);
@@ -56,7 +61,7 @@ function Sidebar() {
         >
           Home
         </NavLink>
-        <NavLink to={`${user.email}/boards`} className={({isActive}) => isActive ? 'active=link' : ''}>
+        <NavLink to={`${user.email}/boards`} className={({isActive}) => isActive ? 'active-link' : ''}>
           Boards
         </NavLink>
         <button onClick={() => {
@@ -69,9 +74,10 @@ function Sidebar() {
         <div className="workspaces-list-container">
         {workspaces.map((workspace, idx) => (
           <div className="workspace-item" onClick={() => handleWorkspaceClick(workspace.id)}>
-          <div className="title-bar">
+          <div className={`title-bar ${currentWorkspace.id === workspace.id ? 'current-workspace' : ''}`}>
             <div className="icon"></div>
             <div>{workspace.title}</div>
+            <img src={openWorkspaceId === workspace.id ? up_arrow : down_arrow} alt="caret" />
           </div>
             {openWorkspaceId === workspace.id && (
                 <ul className="workspace-dropdown-menu">

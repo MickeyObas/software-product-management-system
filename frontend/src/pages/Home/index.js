@@ -2,23 +2,12 @@ import React from "react";
 import './styles.css';
 import heart_icon from '../../components/assets/heart.png';
 import clock_icon from '../../components/assets/clock.png';
+import ActivityFeed from "../../components/ActivityFeed/ActivityFeed";
 
 export default function Home(){
     return(
         <div className="home-content">
-            <div className="activity-feed">
-                <div className="highlights-section">
-                    <div className="highlights-header">
-                        <img src={heart_icon} alt="heart icon"/>
-                        <p>Highlights</p>
-                    </div>
-                    <div className="highlights-tab"></div>
-                    <div className="highlights-tab"></div>
-                    <div className="highlights-tab"></div>
-                    <div className="highlights-tab"></div>
-                    <div className="highlights-tab"></div>
-                </div>
-            </div>
+            <ActivityFeed />
             <div className="home-sidebar">
                 <div className="recently-viewed-section">
                     <div className="recently-viewed-header">

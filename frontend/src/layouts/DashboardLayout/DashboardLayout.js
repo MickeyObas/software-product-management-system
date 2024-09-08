@@ -10,6 +10,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 function DashboardLayout() {
     const location = useLocation();
     const isAddProductPage = location.pathname.includes('/add-product/');
+    const isBoardPage = location.pathname.includes('/boards/');
     const navigate = useNavigate();
 
     return (
@@ -19,7 +20,8 @@ function DashboardLayout() {
                 <Sidebar /> {/* Sidebar on the left */}
                 <div className="dashboard-content" style={{
                     paddingTop: isAddProductPage ? "35px" : "0px",
-                    paddingBottom: isAddProductPage ? "70px" : "0px"
+                    paddingBottom: isAddProductPage ? "70px" : "0px",
+                    overflowY: isBoardPage ? "hidden" : ""
                 }}>
                     <Outlet />
                 </div>

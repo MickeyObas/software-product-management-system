@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ProfileMenu.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import AddProduct from '../../pages/AddProduct';
 import { useWorkspace } from '../WorkspaceContext';
@@ -12,6 +12,7 @@ function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
   }
 
   const { currentWorkspace } = useWorkspace();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -34,10 +35,17 @@ function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
                 to={`workspaces/add-product/`}
                 onClick={handleTabClick}
                 >Add Product</NavLink>
-                <a href=''>Create Workspace</a>
+                <NavLink
+                to={`workspaces/add-workspace/`}
+                onClick={handleTabClick}
+                >Create Workspace</NavLink>
                 <hr />
                 <a href=''>Settings</a>
-                <a href=''>Logout</a>
+                <button onClick={() => {
+                  localStorage.removeItem('accessToken');
+                  localStorage.removeItem('refreshToken');
+                  navigate('/login');
+                }}>Logout</button>
             </div>
         </div>
       )}

@@ -10,6 +10,7 @@ import profile_icon from '../assets/profile.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import { UserContext } from '../UserContext';
+import { useProduct } from '../ProductContext';
 
 function Navbar() {
 
@@ -22,7 +23,9 @@ function Navbar() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
+  const { currentProduct, setCurrentProduct } = useProduct();
   const navigate = useNavigate();
+
   const { user } = useContext(UserContext);
 
   const toggleSideMenu = () => {
@@ -56,6 +59,12 @@ function Navbar() {
   const handleWorkspaceSelect = (workspace) => {
     setCurrentWorkspace(workspace);
     localStorage.setItem('currentWorkspace', JSON.stringify(workspace));
+    handleTabClick();
+  }
+
+  const handleProductSelect = (product) => {
+    setCurrentProduct(product);
+    localStorage.setItem('currentProduct', JSON.stringify(product));
     handleTabClick();
   }
 
@@ -163,7 +172,7 @@ function Navbar() {
                     <div className='title-text'>Current Product</div>
                     <div className='products-dropdown-sub-tab'>
                       <div className='icon'></div>
-                      <div className='title'>{currentWorkspace ?currentWorkspace.title : 'No Product Selected Yet'}</div>
+                      <div className='title'>{currentProduct ?currentProduct.title : 'No Product Selected Yet'}</div>
                     </div>
                   </div>
                   <hr className='dropdown-divider'/>
@@ -172,7 +181,7 @@ function Navbar() {
                     {products && products.map((product, idx) => (
                       <div
                       className='products-dropdown-sub-tab'
-            
+                      onClick={() => handleProductSelect(product)}
                       >
                       <div className='icon'></div>
                       <div className='title'>

@@ -5,10 +5,12 @@ from rest_framework import status
 
 from .serializers import WorkspaceSerializer
 from .models import Workspace
+
 from products.models import Product
 from boards.models import Board
 from products.serializers import ProductSerialzer
 from boards.serializers import BoardSerializer
+from activities.utils import log_activity
 
 
 @api_view(['POST'])
@@ -16,7 +18,16 @@ def create_workspace(request):
     if request.method == 'POST':
         serializer = WorkspaceSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(owner=request.user)
+            workspace = serializer.save(owner=request.user)
+            
+            log_activity(
+                user=request.user, 
+                obj=workspace, 
+                action_type='created',
+                activity_type='workspace_created',
+                description=f"Created workspace: {workspace.title}"
+            )
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

@@ -1,7 +1,7 @@
 .dashboard-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
   }
   
   .main-container {
@@ -13,11 +13,9 @@
     flex: 1;
     margin-left: 350px;
     margin-top: 45px;
-    max-height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-color: #70a1fd #d9e6fe;
   }
 
-  .dashboard-content .add-product-form{
-    
-  }
+
   

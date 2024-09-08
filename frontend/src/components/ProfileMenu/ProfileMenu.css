@@ -61,7 +61,23 @@ padding-top: 30px;
     padding: 8px 4px;
     width: 100%;
     padding-left: 25px;
+}
 
+.menu-modal button{
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 4px;
+    padding: 8px 4px;
+    width: 100%;
+    padding-left: 25px;
+    border: none;
+    text-align: left;
+    background: none;
+}
+
+.menu-modal button:hover{
+    background-color: #d9e6ff;
 }
 
 .menu-modal .links-container a:hover{
