@@ -8,7 +8,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    height: 60px;
+    height: 70px;
     padding: 15px;
     background: rgba(0,0,0,0.1);
     width: 100%;
@@ -32,7 +32,7 @@
 
 .board-content .profile-button{
     height: 28px;
-    margin-left: 530px;
+    margin-left: auto;
     margin-right: 10px;
 }
 
