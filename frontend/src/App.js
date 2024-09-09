@@ -4,6 +4,7 @@ import { UserProvider } from './components/UserContext';
 import { WorkspaceProvider } from './components/WorkspaceContext';
 import { ProductProvider } from './components/ProductContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { FavoriteBoardsProvider } from './components/FavoriteBoardsContext';
 
 // Components 
 
@@ -36,6 +37,7 @@ function App() {
 return (
   <div className="containerr">
   <UserProvider>
+  <FavoriteBoardsProvider>
   <WorkspaceProvider>
   <ProductProvider>
   <Router>
@@ -63,8 +65,8 @@ return (
     </Router>
     </ProductProvider>
     </WorkspaceProvider>
+    </FavoriteBoardsProvider>
   </UserProvider>
-    
   </div>
 );
 }

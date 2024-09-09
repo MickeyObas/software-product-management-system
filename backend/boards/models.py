@@ -12,6 +12,7 @@ class Board(models.Model):
     product = models.ForeignKey('products.Product', models.CASCADE, default=1)
     description = models.TextField()
     title = models.CharField(max_length=255)
+    is_starred = models.BooleanField(default=False)
     visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, default='workspace')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -19,6 +20,15 @@ class Board(models.Model):
     def __str__(self):
         return self.title
     
+
+class Favorite(models.Model):
+    user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='favorites')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='favorited_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'board')  # Ensures a user can only favorite a board once
+
 
 class RecentlyViewedBoard(models.Model):
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)

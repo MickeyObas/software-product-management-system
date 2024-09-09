@@ -3,11 +3,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Board, List, RecentlyViewedBoard
+from .models import Board, List, RecentlyViewedBoard, Favorite
 from .serializers import (
     BoardSerializer,
     ListSerializer,
-    CardSerializer
+    CardSerializer,
+    FavoriteSerializer
 )
 
 from cards.models import Card
@@ -108,6 +109,40 @@ def get_recently_viewed_boards(request):
     board_serializer = BoardSerializer([recent.board for recent in recent_boards], many=True)
 
     return Response(board_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def is_favorite_board(request, pk):
+    try:
+        board = Board.objects.get(id=pk)
+    except Board.DoesNotExist:
+        return Response({'error': 'Board not found'}, status=404)
+
+    is_favorite = Favorite.objects.filter(user=request.user, board=board).exists()
+    return Response({'is_favorite': is_favorite}, status=200)
+
+
+@api_view(['GET'])
+def get_favorite_boards(request):
+    try:
+        favorites = Favorite.objects.filter(user=request.user)
+        boards = [favorite.board for favorite in favorites]
+        serializer = BoardSerializer(boards, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        print("Error: ", e)
+        return Response(status=500)
+    
+
+
+@api_view(['POST'])
+def toggle_favorite_board(request):
+    serializer = FavoriteSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.update(request.user, serializer.validated_data)
+        return Response({'message': 'Favorite toggled successfully'}, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])

@@ -255,6 +255,55 @@
     text-align: left;
 }
 
+.navigation-bar .favorites-dropdown-tab{
+    display: flex;
+    color: white;
+    margin-left: 11px;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 4px 5px;
+    border-radius: 5px;
+}
+
+.navigation-bar .favorites-dropdown-tab:hover{
+    background-color: #1d3545;
+}
+
+.navigation-bar .favorites-dropdown-tab:first-of-type{
+    padding-top: 0;
+}
+
+.navigation-bar .favorites-dropdown-tab:last-of-type{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
+.navigation-bar .favorites-dropdown-tab .title-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navigation-bar .favorites-dropdown-tab .icon{
+    width: 40px;
+    height: 30px;
+    margin-right: 8px;
+    background-color: lightblue;
+    border-radius: 5px;
+}
+
+.navigation-bar .favorites-dropdown-tab .title{
+    font-size: 14px;
+    text-align: left;
+}
+
+.navigation-bar .favorites-dropdown-tab .subtitle{
+    font-size: 12px;
+    opacity: 70%;
+    text-align: left;
+}
+
 .navigation-bar .starred-text{
     align-self: center;
     justify-self: center;

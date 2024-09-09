@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import { UserContext } from '../UserContext';
 import { useProduct } from '../ProductContext';
+import { FavoriteBoardsContext } from '../FavoriteBoardsContext';
 
 function Navbar() {
 
@@ -19,6 +20,10 @@ function Navbar() {
     index: null
   });
   const [workspaces, setWorkspaces] = useState([]);
+  // const [favoriteBoards, setFavoriteBoards] = useState([]);
+
+  const { favoriteBoards } = useContext(FavoriteBoardsContext);
+
   const [products, setProducts] = useState([]);
   const [recentlyViewedBoards, setRecentlyViewedBoards] = useState([]);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -68,6 +73,13 @@ function Navbar() {
     localStorage.setItem('currentProduct', JSON.stringify(product));
     handleTabClick();
   }
+
+  useEffect(() => {
+    fetchWithAuth('http://localhost:8000/api/boards/favorite-boards/')  // Endpoint to get user's favorite boards
+      .then(response => response.json())
+      // .then(data => setFavoriteBoards(data))
+      .catch(error => console.error('Error fetching favorite boards:', error));
+  }, []);
 
   useEffect(() => {
     // Function to fetch recently viewed boards
@@ -246,7 +258,19 @@ function Navbar() {
               <a href="/" onClick={(e) => handleDropdownClick(e, 3)}>Starred</a>
               {(dropdown.open && dropdown.index === 3) && (
                 <ul className='dropdown-menuu'>
-                  <p className='starred-text'>Star important boards to access them quickly and easily.</p>
+                  {!favoriteBoards.length > 0 ? (
+                    <p className='starred-text'>Star important boards to access them quickly and easily.</p>
+                  ) : (favoriteBoards.map((board, idx) => (
+                    <NavLink
+                    className='favorites-dropdown-tab'
+                    >
+                      <div className='icon'></div>
+                      <div className='title-block'>
+                        <div className='title'>{board.title}</div>
+                        <div className='subtitle'>{board.workspace_title}</div>
+                      </div>
+                    </NavLink>
+                  )))}
                 </ul>
               )}
             </li>
