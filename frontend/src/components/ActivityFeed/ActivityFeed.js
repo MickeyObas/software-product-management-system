@@ -3,6 +3,8 @@ import { fetchWithAuth } from '../utils';
 import './ActivityFeed.css';
 import heart_icon from '../assets/heart.png';
 import profile_icon from '../assets/profile.png';
+import comment_icon from '../assets/message.png';
+import { timeAgo } from '../utils';
 
 const ActivityFeed = () => {
   const [activities, setActivities] = useState([]);
@@ -28,14 +30,16 @@ const ActivityFeed = () => {
         return (
             <div className='product-created-activity'>
                 <div className='activity-header'>
-                    <h5>{`${activity.user.email} created a product: ${objectData.title}`}</h5>
+                    <h5>{`${activity.user.email} created a product: ` }
+                    <span style={{fontWeight: "bold"}}>{objectData.title}</span>
+                    </h5>
                 </div>
                 <div className='activity-body'>
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
                             <div className='username'>MickeyGooo</div>
-                            <div className='time-ago'>3 hours ago</div>
+                            <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
                 </div>
@@ -45,14 +49,16 @@ const ActivityFeed = () => {
         return (
             <div className='workspace-created-activity'>
                 <div className='activity-header'>
-                    <h5>{`${activity.user.email} created a workspace: ${objectData.title}`}</h5>
+                    <h5>{`${activity.user.email} created a workspace: `}
+                    <span style={{fontWeight: "bold"}}>{objectData.title}</span>
+                    </h5>
                 </div>
                 <div className='activity-body'>
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
                             <div className='username'>MickeyGooo</div>
-                            <div className='time-ago'>3 hours ago</div>
+                            <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
                 </div>
@@ -62,14 +68,16 @@ const ActivityFeed = () => {
         return (
           <div className='card-created-activity'>
                 <div className='activity-header'>
-                    <h5>{`${activity.user.email} added a card: ${objectData.title}`}</h5>
+                    <h5>{`${activity.user.email} added a card: `}
+                    <span style={{fontWeight: "bold"}}>{objectData.title}</span>
+                    </h5>
                 </div>
                 <div className='activity-body'>
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
                             <div className='username'>MickeyGooo</div>
-                            <div className='time-ago'>3 hours ago</div>
+                            <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +90,34 @@ const ActivityFeed = () => {
             </div>
         );
       case 'comment_added':
-        return <div><strong>{activity.user}</strong> added a comment: {activity.description}</div>;
+        return (
+          <div className='comment-created-activity'>
+                <div className='activity-header'>
+                    <h5>{`${activity.user.email} made a comment on `}
+                    <span style={{fontWeight: "bold"}}>{extraData.card_list_title}</span>
+                    </h5>
+                </div>
+                <div className='activity-body'>
+                    <div className='user-container'>
+                        <img src={profile_icon} alt='profile-icon'/>
+                        <div className='user-time-bar'>
+                            <div className='username'>MickeyGooo</div>
+                            <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className='activity-footer'>
+                  <div className='card-bodyy'>
+                    <div className='comment-container'>
+                      <img src={comment_icon} alt='comment-icon' />
+                      <div className='comment-body'>"{objectData.text}"</div>
+                    </div>
+                    <h5>{extraData.card_board_title} - {extraData.card_list_title}</h5>
+                    <h4>{extraData.card_workspace_title}</h4>
+                  </div>
+                </div>
+            </div>
+        );
       default:
         return <div>{activity.description}</div>;
     }

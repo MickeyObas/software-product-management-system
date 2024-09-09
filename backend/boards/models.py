@@ -20,6 +20,16 @@ class Board(models.Model):
         return self.title
     
 
+class RecentlyViewedBoard(models.Model):
+    user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['user', 'board']  # Ensures a user can't have the same board listed twice.
+        ordering = ['-viewed_at']  # Orders by the most recent first
+
+
 class List(models.Model):
     board = models.ForeignKey('boards.Board', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)

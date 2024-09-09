@@ -20,6 +20,7 @@ function Navbar() {
   });
   const [workspaces, setWorkspaces] = useState([]);
   const [products, setProducts] = useState([]);
+  const [recentlyViewedBoards, setRecentlyViewedBoards] = useState([]);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
@@ -67,6 +68,29 @@ function Navbar() {
     localStorage.setItem('currentProduct', JSON.stringify(product));
     handleTabClick();
   }
+
+  useEffect(() => {
+    // Function to fetch recently viewed boards
+    const fetchRecentlyViewedBoards = async () => {
+      try {
+        const response = await fetchWithAuth('http://localhost:8000/api/boards/recently-viewed/', {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setRecentlyViewedBoards(data); // Store the boards in the state
+        } else {
+          console.error('Failed to fetch recently viewed boards:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching recently viewed boards:', error);
+      }
+    };
+
+    fetchRecentlyViewedBoards();
+  }, []); // Empty dependency array to run once when component mounts
+  
 
   useEffect(() => {
     const fetchWorkspaces = async () => {
@@ -202,48 +226,19 @@ function Navbar() {
               <a href="/" onClick={(e) => handleDropdownClick(e, 2)}>Recents</a>
               {(dropdown.open && dropdown.index === 2) && (
                 <ul className='dropdown-menuu'>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
-                  <div className='recent-dropdown-tab'>
-                    <div className='icon'></div>
-                    <div className='title-block'>
-                      <div className='title'>Testing 5 Product Management</div>
-                      <div className='subtitle'>MickeyGooo's Workspace</div>
-                    </div>
-                  </div>
+                  {recentlyViewedBoards && recentlyViewedBoards.map((board, idx) => (
+                    <NavLink
+                    className='recent-dropdown-tab'
+                    to={`/boards/${board.id}/${board.title}/`}
+                    onClick={handleTabClick}
+                    >
+                      <div className='icon'></div>
+                      <div className='title-block'>
+                        <div className='title'>{board.title}</div>
+                        <div className='subtitle'>{board.workspace_title}</div>
+                      </div>
+                    </NavLink>
+                  ))} 
                 </ul>
               )}
             </li>

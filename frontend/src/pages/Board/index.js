@@ -52,6 +52,23 @@ export default function Board(){
         };
 
         fetchLists();
+
+        const updateRecentlyViewed = async () => {
+            try {
+              const updateResponse = await fetchWithAuth(`http://localhost:8000/api/boards/${boardId}/update-recently-viewed/`, {
+                method: 'POST',
+              });
+      
+              if (!updateResponse.ok) {
+                console.error('Failed to update recently viewed boards');
+              }
+            } catch (error) {
+              console.error('Error updating recently viewed board:', error);
+            }
+          };
+      
+          // Update recently viewed board
+          updateRecentlyViewed();
     }, [boardId]);
 
     return (

@@ -15,37 +15,6 @@ from activities.utils import log_activity
 import json
 
 
-@api_view(['POST'])
-def add_new_card_to_list(request, list_id):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        try:
-            list = List.objects.get(
-                id=list_id
-            )
-        except List.DoesNotExist:
-            return Response(status=status.HTTP_404_DOES_NOT_EXIST)
-        
-        new_card = Card.objects.create(
-            list=list,
-            title=data['title']
-        )
-
-        new_card.save()
-
-        log_activity(
-            user=request.user,
-            obj=new_card,
-            action_type='create',
-            activity_type='card_created',
-            description=f"Created card: {new_card.title}"
-        )
-
-        serializer = ListSerializer(list)
-
-        return Response(serializer.data)
-
-
 @api_view(['PATCH'])
 def update_card_description(request, pk):
 
@@ -104,6 +73,22 @@ def card_comment_list_or_create(request, card_id):
         )
 
         new_card_comment.save()
+
+        extra_data = {
+            'card_title': card.title,
+            'card_list_title': card.list.title,
+            'card_board_title': card.list.board.title,
+            'card_workspace_title': card.list.board.product.workspace.title
+        }
+
+        log_activity(
+            user=request.user,
+            obj=new_card_comment,
+            extra_data=extra_data,
+            action_type='create',
+            activity_type='comment_added',
+            description=f"Added Comment: '{new_card_comment.text}' "
+        )
 
         serializer = CardCommentSerializer(new_card_comment)
 

@@ -5,6 +5,7 @@ from django.conf import settings
 import json
 
 class Activity(models.Model):
+    # TODO:  Display activities relating a user to a workspace, card, or board
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     action_type = models.CharField(max_length=50)  # e.g., 'created', 'updated'
     activity_type = models.CharField(max_length=100, default='', blank=True, null=True)

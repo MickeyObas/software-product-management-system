@@ -1,14 +1,16 @@
-from  rest_framework import status
+from django.utils import timezone
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Board, List
-from cards.models import Card
+from .models import Board, List, RecentlyViewedBoard
 from .serializers import (
     BoardSerializer,
     ListSerializer,
     CardSerializer
 )
+
+from cards.models import Card
 from activities.utils import log_activity
 
 import json
@@ -90,4 +92,50 @@ def add_new_card_to_list(request, pk, list_id):
         serializer = CardSerializer(new_card)
 
         return Response(serializer.data)
+    
+
+@api_view(['GET'])
+def get_recently_viewed_boards(request):
+    """
+    Endpoint to retrieve the recently viewed boards for the current user.
+    """
+    user = request.user
+
+    # Retrieve the user's recently viewed boards (limit to 5 most recent)
+    recent_boards = RecentlyViewedBoard.objects.filter(user=user).order_by('-viewed_at')[:5]
+
+    # Serialize the boards
+    board_serializer = BoardSerializer([recent.board for recent in recent_boards], many=True)
+
+    return Response(board_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def update_recently_viewed(request, pk):
+    """
+    Endpoint to update the recently viewed boards for the current user.
+    """
+    user = request.user
+
+    # Try to get the board
+    try:
+        board = Board.objects.get(id=pk)
+    except Board.DoesNotExist:
+        return Response({"detail": "Board not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    # Update or create the RecentlyViewedBoard instance
+    RecentlyViewedBoard.objects.update_or_create(
+        user=user,
+        board=board,
+        defaults={'viewed_at': timezone.now()}
+    )
+
+    # Retrieve the user's recently viewed boards (limit to 5 most recent)
+    recent_boards = RecentlyViewedBoard.objects.filter(user=user).order_by('-viewed_at')[:5]
+
+    # Serialize the boards for the response
+    board_serializer = BoardSerializer([recent.board for recent in recent_boards], many=True)
+
+    return Response(board_serializer.data, status=status.HTTP_200_OK)
+
     

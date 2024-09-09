@@ -11,10 +11,11 @@
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+    outline: 1.2px solid #b9d1fd;
 }
 
 .workspace-created-activity .activity-header{
-    height: 40%;
+    height: 45%;
     background-color: #b9d1fd;
     display: flex;
     justify-content: flex-start;
@@ -72,11 +73,11 @@
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+
 }
 
 .product-created-activity .activity-header{
     height: 40%;
-    background-color: #b9d1fd;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -131,16 +132,16 @@
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+    outline: 1.2px solid lightsalmon;
 }
 
 .card-created-activity .activity-header{
-    height: 22%;
+    height: 25%;
     background-color: lightsalmon !important;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
     padding-left: 15px;
-    background-color: lightgreen;
 }
 
 .card-created-activity .activity-header h5{
@@ -200,16 +201,126 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
 }
 
 .card-created-activity .activity-footer .card-bodyy h5{
     font-size: 12px;
     display: flex;
     margin: 0px;
+    margin-bottom: 4px;
 }
 
 .card-created-activity .activity-footer .card-bodyy h4{
     font-size: 14px;
     margin: 0px;
+}
+
+/* COMMENTS */
+.comment-created-activity{
+    height: 250px;
+    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    outline: 1.2px solid rgb(245, 245, 97);
+}
+
+.comment-created-activity .activity-header{
+    height: 21%;
+    background-color:rgb(245, 245, 97) !important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 15px;
+}
+
+.comment-created-activity .activity-header h5{
+    font-size: 12px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.comment-created-activity .activity-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-created-activity .user-container{
+    display: flex;
+    padding-left: 18px;
+    padding-top: 10px;
+    align-items: center;
+    margin-bottom: 4.5px;
+}
+
+.comment-created-activity img{
+    width: 30px;
+    height: 30px;
+    margin-right: 14px;
+}
+
+.comment-created-activity .user-time-bar{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+
+.comment-created-activity .username{
+    font-weight: bold;
+}
+
+
+.comment-created-activity .time-ago{
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.comment-created-activity .activity-footer{
+    height: 55%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-created-activity .activity-footer .card-bodyy{
+    display: flex;
+    height: 75%;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-created-activity .activity-footer .card-bodyy img{
+    height: 60px;
+    width: 60px;
+    display: inline;
+}
+
+.comment-created-activity .activity-footer .card-bodyy .comment-container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.comment-created-activity .activity-footer .card-bodyy .comment-body{
+    font-size: 12px;
+}
+
+
+.comment-created-activity .activity-footer .card-bodyy h5{
+    font-size: 12px;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 4px;
+}
+
+.comment-created-activity .activity-footer .card-bodyy h4{
+    font-size: 14px;
+    margin: 0px;
+    padding: 0px;
 }

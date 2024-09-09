@@ -113,7 +113,9 @@
     width: 100%;
     margin-left: 15px;
     margin-bottom: 15px;
-    color: white
+    color: white;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .navigation-bar .workspaces-dropdown-tab:first-of-type,
@@ -159,7 +161,9 @@
     width: 100%;
     margin-left: 15px;
     margin-bottom: 15px;
-    color: white
+    color: white;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .navigation-bar .products-dropdown-tab:first-of-type,
@@ -207,7 +211,7 @@
     color: white;
     margin-left: 11px;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     padding: 4px 5px;
     border-radius: 5px;
 }
@@ -242,6 +246,7 @@
 
 .navigation-bar .recent-dropdown-tab .title{
     font-size: 14px;
+    text-align: left;
 }
 
 .navigation-bar .recent-dropdown-tab .subtitle{

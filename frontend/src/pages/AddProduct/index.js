@@ -19,7 +19,7 @@ const AddProduct = () => {
   const [type, setType] = useState('software_application');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('planning');
-  const [workspace, setWorkspace] = useState('');
+  const [workspace, setWorkspace] = useState(currentWorkspace ? currentWorkspace.id : '');
   const [workspaces, setWorkspaces] = useState('');
   const [version, setVersion] = useState('');
   const [repositoryUrl, setRepositoryUrl] = useState('');
@@ -72,7 +72,7 @@ const validateForm = () => {
       setErrors({}); // Clear errors if no validation errors
 
       const productData = {
-        workspace: currentWorkspace.id, 
+        workspace: workspace, 
         title: title, 
         type: type, 
         description: description,
@@ -138,7 +138,7 @@ const validateForm = () => {
 
       <div>
         <label>Workspace</label>
-        <select value={workspace} onChange={(e) => setWorkspace(e.target.value)}>
+        <select value={workspace} onChange={(e) => setWorkspace(e.target.value)} defaultChecked>
         {workspaces && workspaces.map((ws) => (
             <option key={ws.id} value={ws.id}>{ws.title}</option>
           ))}
