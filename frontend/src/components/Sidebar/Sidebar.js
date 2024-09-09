@@ -18,7 +18,7 @@ function Sidebar() {
 
   const navigate = useNavigate();
   const {user, loading} = useContext(UserContext);
-  const {currentWorkspace} = useWorkspace();
+  const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
 
   const [workspaces, setWorkspaces] = useState([]);
   const [openWorkspaceId, setOpenWorkspaceId] = useState(null);
@@ -44,6 +44,11 @@ function Sidebar() {
 
     const handleWorkspaceClick = (id) => {
       setOpenWorkspaceId(openWorkspaceId === id ? null : id);
+    }
+
+    const handleBoardsClick = (workspace) => {
+      setCurrentWorkspace(workspace);
+      localStorage.setItem('currentWorkspace', JSON.stringify(workspace));
     }
   
   if(!user){
@@ -82,7 +87,7 @@ function Sidebar() {
             {openWorkspaceId === workspace.id && (
                 <ul className="workspace-dropdown-menu">
                   <li>
-                  <NavLink to={`/workspaces/${workspace.id}/`}><img src={board_icon} alt="board" className="default-icon"/>Boards</NavLink></li>
+                  <NavLink to={`/workspaces/${workspace.id}/`} onClick={() => handleBoardsClick(workspace)}><img src={board_icon} alt="board" className="default-icon"/>Boards</NavLink></li>
                   <li><NavLink to={`${workspace.id}/members/`}><img src={members_icon} alt="members"/>Members</NavLink></li>
                   <li><NavLink to={`${workspace.id}/settings/`}><img src={settings_icon} alt="settings"/>Settings</NavLink></li>
                 </ul>

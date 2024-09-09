@@ -257,12 +257,14 @@ function Navbar() {
             <li className='head-link'>
               <a href="/" onClick={(e) => handleDropdownClick(e, 3)}>Starred</a>
               {(dropdown.open && dropdown.index === 3) && (
-                <ul className='dropdown-menuu'>
+                <ul className='dropdown-menuu favorites'>
                   {!favoriteBoards.length > 0 ? (
                     <p className='starred-text'>Star important boards to access them quickly and easily.</p>
                   ) : (favoriteBoards.map((board, idx) => (
                     <NavLink
                     className='favorites-dropdown-tab'
+                    to={`/boards/${board.id}/${board.title}/`}
+                    onClick={handleTabClick}
                     >
                       <div className='icon'></div>
                       <div className='title-block'>

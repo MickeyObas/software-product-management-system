@@ -222,6 +222,7 @@
 
 .navigation-bar .recent-dropdown-tab:first-of-type{
     padding-top: 0;
+    margin-top: 5PX;
 }
 
 .navigation-bar .recent-dropdown-tab:last-of-type{
@@ -255,6 +256,14 @@
     text-align: left;
 }
 
+.navigation-bar ul.dropdown-menuu.favorites{
+    max-height: 200px;
+    overflow-y: auto;
+    display: block;
+    padding-top: 3px;
+    padding-bottom: 10px !important;
+}
+
 .navigation-bar .favorites-dropdown-tab{
     display: flex;
     color: white;
@@ -263,6 +272,8 @@
     margin-bottom: 5px;
     padding: 4px 5px;
     border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .navigation-bar .favorites-dropdown-tab:hover{
