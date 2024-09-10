@@ -8,6 +8,7 @@ from .models import Workspace
 
 from products.models import Product
 from boards.models import Board
+from accounts.models import CustomUser
 from products.serializers import ProductSerialzer
 from boards.serializers import BoardSerializer
 from activities.utils import log_activity
@@ -25,7 +26,8 @@ def create_workspace(request):
                 obj=workspace, 
                 action_type='created',
                 activity_type='workspace_created',
-                description=f"Created workspace: {workspace.title}"
+                description=f"Created workspace: {workspace.title}",
+                workspace=workspace
             )
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -47,7 +49,12 @@ def workspace_detail(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def workspace_list(request):
-    user_workspaces = Workspace.objects.filter(owner=request.user)
+    # Get workspaces where the user is either the owner or a member
+    user_workspaces = Workspace.objects.filter(owner=request.user) | Workspace.objects.filter(members=request.user)
+    
+    # Ensure distinct results in case the user is both owner and member of some workspaces
+    user_workspaces = user_workspaces.distinct()
+    
     serializer = WorkspaceSerializer(user_workspaces, many=True)
     return Response(serializer.data)
 
@@ -63,3 +70,19 @@ def board_list(request, workspace_id):
     serializer = BoardSerializer(boards, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def add_member(request, pk):
+    email = request.data.get('email')
+    try:
+        user = CustomUser.objects.get(email=email)
+        workspace = Workspace.objects.get(id=pk)
+        if workspace.owner != request.user:
+            return Response({"detail": "You are not the owner of this workspace."}, status=403)
+        workspace.members.add(user)
+        return Response({"detail": "Member added successfully."}, status=200)
+    except CustomUser.DoesNotExist:
+        return Response({"detail": "User not found."}, status=404)
+    except Workspace.DoesNotExist:
+        return Response({"detail": "Workspace not found."}, status=404)

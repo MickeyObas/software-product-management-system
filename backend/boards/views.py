@@ -25,13 +25,13 @@ def lists_for_board(request, pk):
     except Board.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    board_lists = List.objects.filter(
-        board=board,
-        board__product__owner=request.user
-    )
-
-    serializer = ListSerializer(board_lists, many=True)
-    return Response(serializer.data)
+    # Check if the user is either the owner of the product or a member of the workspace
+    if board.product.owner == request.user or board.product.workspace.members.filter(id=request.user.id).exists():
+        board_lists = List.objects.filter(board=board)
+        serializer = ListSerializer(board_lists, many=True)
+        return Response(serializer.data)
+    else:
+        return Response({"detail": "You do not have access to this board's lists."}, status=status.HTTP_403_FORBIDDEN)
 
 
 @api_view(['GET'])
@@ -87,7 +87,8 @@ def add_new_card_to_list(request, pk, list_id):
             extra_data=extra_data,
             action_type='create',
             activity_type='card_created',
-            description=f"Created card: {new_card.title}"
+            description=f"Created card: {new_card.title}",
+            workspace=new_card.list.board.product.workspace
         )
 
         serializer = CardSerializer(new_card)

@@ -27,7 +27,8 @@ def create_product(request):
                 obj=product,
                 action_type='created',
                 activity_type='product_created',
-                description=f"Created product: {product.title}"
+                description=f"Created product: {product.title}",
+                workspace=product.workspace
             )
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -36,9 +37,13 @@ def create_product(request):
 
 @api_view(['GET'])
 def product_list(request):
-    user_products = Product.objects.filter(owner=request.user)
+    # Get products where the user is either the owner or a member of the workspace
+    user_products = Product.objects.filter(owner=request.user) | Product.objects.filter(workspace__members__id=request.user.id)
+    
+    # Ensure distinct results in case the user is both owner and member of some workspaces
+    user_products = user_products.distinct()
+    
     serializer = ProductSerialzer(user_products, many=True)
     return Response(serializer.data)
-
 
 

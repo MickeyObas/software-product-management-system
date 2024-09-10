@@ -4,7 +4,7 @@ import json
 
 from .models import Activity
 
-def log_activity(user, obj, action_type, activity_type, description, extra_data=None):
+def log_activity(user, obj, action_type, activity_type, description, workspace, extra_data=None):
         content_type = ContentType.objects.get_for_model(obj)
         object_data = serialize('json', [obj])  # Serialize the object to JSON
         Activity.objects.create(
@@ -15,5 +15,6 @@ def log_activity(user, obj, action_type, activity_type, description, extra_data=
             content_type=content_type,
             object_id=obj.id,
             object_data=object_data,
-            description=description
+            description=description,
+            workspace=workspace
         )

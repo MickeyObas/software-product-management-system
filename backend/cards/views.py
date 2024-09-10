@@ -87,7 +87,8 @@ def card_comment_list_or_create(request, card_id):
             extra_data=extra_data,
             action_type='create',
             activity_type='comment_added',
-            description=f"Added Comment: '{new_card_comment.text}' "
+            description=f"Added Comment: '{new_card_comment.text}' ",
+            workspace=card.list.board.product.workspace
         )
 
         serializer = CardCommentSerializer(new_card_comment)
