@@ -217,7 +217,7 @@
 
 /* COMMENTS */
 .comment-created-activity{
-    height: 250px;
+    height: 300px;
     width: 80%;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -226,7 +226,7 @@
 }
 
 .comment-created-activity .activity-header{
-    height: 21%;
+    height: 20%;
     background-color:rgb(245, 245, 97) !important;
     display: flex;
     justify-content: flex-start;
@@ -250,7 +250,7 @@
     padding-left: 18px;
     padding-top: 10px;
     align-items: center;
-    margin-bottom: 4.5px;
+    margin-bottom: 16px;
 }
 
 .comment-created-activity img{
@@ -303,7 +303,7 @@
 .comment-created-activity .activity-footer .card-bodyy .comment-container{
     display: flex;
     align-items: center;
-    margin-bottom: 17px;
+    margin-bottom: 33px;
 }
 
 .comment-created-activity .activity-footer .card-bodyy .comment-body{

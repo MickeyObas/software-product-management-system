@@ -121,6 +121,10 @@
     border-radius: 6px;
     margin-bottom: 10px;
     cursor: pointer;
+    word-wrap: break-word; /* Ensures long words or URLs break and wrap onto the next line */
+    overflow-wrap: break-word; /* Breaks long words and ensures they don’t overflow the container */
+    white-space: normal; /* Allows text to wrap normally */
+    text-overflow: ellipsis; /* Adds ellipsis (...) if text overflows (optional) */
 }
 
 .board-content .list-cards-container .list-card:hover{
