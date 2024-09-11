@@ -38,7 +38,7 @@ const ActivityFeed = () => {
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
-                            <div className='username'>MickeyGooo</div>
+                            <div className='username'>{activity.user.first_name} {activity.user.last_name}</div>
                             <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ const ActivityFeed = () => {
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
-                            <div className='username'>MickeyGooo</div>
+                            <div className='username'>{activity.user.first_name} {activity.user.last_name}</div>
                             <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ const ActivityFeed = () => {
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
-                            <div className='username'>MickeyGooo</div>
+                            <div className='username'>{activity.user.first_name} {activity.user.last_name}</div>
                             <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ const ActivityFeed = () => {
                     <div className='user-container'>
                         <img src={profile_icon} alt='profile-icon'/>
                         <div className='user-time-bar'>
-                            <div className='username'>MickeyGooo</div>
+                            <div className='username'>{activity.user.first_name} {activity.user.last_name}</div>
                             <div className='time-ago'>{timeAgo(objectData.created_at)}</div>
                         </div>
                     </div>

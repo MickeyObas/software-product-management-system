@@ -40,6 +40,31 @@
     background-color: rgba(131, 131, 255, 0.5);
 }
 
+.workspace-content .add-member-container{
+    display: flex;
+    gap: 5px;
+}
+
+.workspace-content .add-member-container button{
+    background-color: lightgreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 6px;
+    border-radius: 5px;
+    height: 28px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 0px;
+    font-size: 14px;
+}
+
+.workspace-content .add-member-container input{
+    border: none;
+    font-size: 14px;
+    padding: 4px 2px;
+}
+
 .workspace-content .invite-button p{
     display: block;
     margin: 0;

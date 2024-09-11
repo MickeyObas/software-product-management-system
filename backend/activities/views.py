@@ -26,3 +26,4 @@ def activity_feed_list(request):
         # Handle unexpected errors
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+ 

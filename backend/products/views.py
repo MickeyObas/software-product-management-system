@@ -32,6 +32,7 @@ def create_product(request):
             )
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print("Whoops ->", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 

@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './ProfileMenu.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import AddProduct from '../../pages/AddProduct';
 import { useWorkspace } from '../WorkspaceContext';
+import { UserContext } from '../UserContext';
 
 function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
 
@@ -12,6 +13,7 @@ function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
   }
 
   const { currentWorkspace } = useWorkspace();
+  const {user, loading} = useContext(UserContext);
   const navigate = useNavigate();
 
   return (
@@ -22,8 +24,8 @@ function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
                 <div className='just-flex-bruh'>
                     <div className='icon'></div>
                     <div className='name-bar'>
-                        <div className='username'>MickeyGooo</div>
-                        <div className='email'>mikhzobby@gmail.com</div>
+                        <div className='username'>{user.first_name} {user.last_name}</div>
+                        <div className='email'>{user.email}</div>
                     </div>
                 </div>
             </div>
@@ -42,8 +44,7 @@ function ProfileMenu({isSideMenuOpen, setIsSideMenuOpen}) {
                 <hr />
                 <a href=''>Settings</a>
                 <button onClick={() => {
-                  localStorage.removeItem('accessToken');
-                  localStorage.removeItem('refreshToken');
+                  localStorage.clear()
                   navigate('/login');
                 }}>Logout</button>
             </div>

@@ -91,6 +91,7 @@ function Navbar() {
 
         if (response.ok) {
           const data = await response.json();
+          console.log("Recently Viewed -> ", data)
           setRecentlyViewedBoards(data); // Store the boards in the state
         } else {
           console.error('Failed to fetch recently viewed boards:', response.statusText);
@@ -208,7 +209,7 @@ function Navbar() {
                     <div className='title-text'>Current Product</div>
                     <div className='products-dropdown-sub-tab'>
                       <div className='icon'></div>
-                      <div className='title'>{currentProduct ?currentProduct.title : 'No Product Selected Yet'}</div>
+                      <div className='title'>{currentProduct?.length > 0 ? currentProduct.title : 'No Product Selected Yet'}</div>
                     </div>
                   </div>
                   <hr className='dropdown-divider'/>

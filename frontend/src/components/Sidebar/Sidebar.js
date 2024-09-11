@@ -70,8 +70,7 @@ function Sidebar() {
           Boards
         </NavLink>
         <button onClick={() => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
+          localStorage.clear()
           navigate('/login');
         }}>Logout</button>
         <hr />
@@ -79,7 +78,7 @@ function Sidebar() {
         <div className="workspaces-list-container">
         {workspaces.map((workspace, idx) => (
           <div className="workspace-item" onClick={() => handleWorkspaceClick(workspace.id)}>
-          <div className={`title-bar ${currentWorkspace.id === workspace.id ? 'current-workspace' : ''}`}>
+          <div className={`title-bar ${currentWorkspace &&(currentWorkspace.id === workspace.id) ? 'current-workspace' : ''}`}>
             <div className="icon"></div>
             <div>{workspace.title}</div>
             <img src={openWorkspaceId === workspace.id ? up_arrow : down_arrow} alt="caret" />

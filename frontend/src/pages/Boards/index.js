@@ -6,12 +6,14 @@ import { NavLink, useParams } from "react-router-dom";
 import Board from '../Board';
 import { useProduct } from "../../components/ProductContext";
 
+
 export default function Boards(){
 
     const [workspaces, setWorkspaces] = useState(null);
     const { currentProduct, setCurrentProduct } = useProduct();
 
     useEffect(() => {
+        console.log(currentProduct);
         const fetchWorkspacesAndBoards = async () => {
             try {
                 const workspacesResponse = await fetchWithAuth('http://localhost:8000/api/workspaces/');
@@ -59,7 +61,7 @@ export default function Boards(){
                         </div>
                     </div>
                     <div className="workspace-boards-section">
-                        {workspace.boards && workspace.boards.filter((board) => board.product.id === currentProduct.id).map((board, idx) => (
+                        {workspace.boards && workspace.boards.filter((board) => board.product.id === currentProduct?.id).map((board, idx) => (
                             <NavLink
                             className='workspace-board-tab-link'
                             to={`/boards/${board.id}/${board.title}`}

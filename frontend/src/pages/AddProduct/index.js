@@ -19,12 +19,22 @@ const AddProduct = () => {
   const [type, setType] = useState('software_application');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('planning');
-  const [workspace, setWorkspace] = useState(currentWorkspace ? currentWorkspace.id : '');
+  const [workspace, setWorkspace] = useState(currentWorkspace?.length > 0 ? currentWorkspace.id : '');
   const [workspaces, setWorkspaces] = useState('');
   const [version, setVersion] = useState('');
   const [repositoryUrl, setRepositoryUrl] = useState('');
   const [documentationUrl, setDocumentationUrl] = useState('');
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    // Set workspace once currentWorkspace or workspaces is fetched
+    if (currentWorkspace && currentWorkspace.id) {
+        setWorkspace(currentWorkspace.id);
+    } else if (workspaces.length > 0) {
+        setWorkspace(workspaces[0].id); // Set the first workspace as default if no current workspace
+    }
+}, [currentWorkspace, workspaces]);
+
 
   useEffect(() => {
     const fetchWorkspaces = async () => {

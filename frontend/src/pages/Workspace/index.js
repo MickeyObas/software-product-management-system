@@ -4,12 +4,14 @@ import { NavLink, useParams } from "react-router-dom";
 
 import './styles.css';
 import { fetchWithAuth } from "../../components/utils";
+import AddMemberForm from "../../components/AddMemberForm";
 
 export default function Workspace(){
 
     const {workspaceId} = useParams();
     const [workspaceData, setWorkspaceData] = useState(null);
     const [boardsData, setBoardsData] = useState(null);
+    const [isAddingMember, setIsAddingMember] = useState(false);
 
     useEffect(() => {
 
@@ -69,9 +71,12 @@ export default function Workspace(){
                     </div>
                 </div>
             </div>
-                <div className="invite-button">
+                {!isAddingMember && (<div className="invite-button" onClick={()=> setIsAddingMember(true)}>
                     <p>Invite Workspace members</p>
-                </div>
+                </div>)}
+                {isAddingMember && (
+                  <AddMemberForm  workspaceId={workspaceId} setIsAddingMember={setIsAddingMember}/>
+                )}
             </div>
             <hr className="dividing-line"></hr>
             <div className="workspace-boards-container">
