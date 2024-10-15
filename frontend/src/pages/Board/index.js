@@ -25,13 +25,6 @@ export default function Board(){
 
     const { favoriteBoards, updateFavoriteBoards } = useContext(FavoriteBoardsContext);
 
-    const dummyLists = [
-        {id: 1, cards:["Card 1", "Card 2", "Card 3", "Another Card"]},
-        {id: 2, cards: ["Card 1"]},
-        {id: 3, cards: ["Card 1", "Card 2"]},
-        {id: 3, cards: ["Card 1", "Card 2", "Card 3"]},
-    ]
-
     const [lists, setLists] = useState();
     const [isAddingCard, setIsAddingCard] = useState({
         status: false,
@@ -51,22 +44,7 @@ export default function Board(){
       const handleToggleFavorite = () => {
         updateFavoriteBoards(boardId);
       };
-
-    /* useEffect(() => {
-        const fetchFavoriteStatus = async () => {
-          try {
-            const response = await fetchWithAuth(`http://localhost:8000/api/boards/${boardId}/is-favorite/`);
-            const data = await response.json();
-            setIsFavorite(data.is_favorite);  // Update favorite status based on API response
-          } catch (error) {
-            console.error('Error fetching favorite status:', error);
-          }
-        };
-    
-        fetchFavoriteStatus();
-      }, [boardId]); */
       
-
     useEffect(() => {
         const fetchLists = async () => {
             try {
@@ -104,19 +82,42 @@ export default function Board(){
           updateRecentlyViewed();
     }, [boardId]);
 
-    /* const handleToggleFavorite = () => {
-        fetchWithAuth('http://localhost:8000/api/boards/toggle-favorite/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ board_id: boardId }),
-        })
-        .then(() => {
-          setIsFavorite(!isFavorite);  // Toggle the favorite status in the UI
-        })
-        .catch(error => console.error('Error toggling favorite:', error));
-      }; */
+
+    const onCardDrop = async (cardId, sourceListId, targetListId) => {
+      try {
+          const response = await fetchWithAuth(
+              `http://localhost:8000/api/boards/${boardId}/lists/${sourceListId}/cards/${cardId}/move/`,
+              {
+                  method: 'PUT',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ target_list_id: targetListId }),
+              }
+          );
+
+          if (response.ok) {
+              const updatedLists = lists.map(list => {
+                  if (list.id === sourceListId) {
+                      return {
+                          ...list,
+                          cards: list.cards.filter(card => card.id !== cardId),
+                      };
+                  }
+                  if (list.id === targetListId) {
+                      return {
+                          ...list,
+                          cards: [...list.cards, { id: cardId }],
+                      };
+                  }
+                  return list;
+              });
+              setLists(updatedLists);
+          }
+      } catch (err) {
+          console.error('Error moving card:', err);
+      }
+  };
 
     return (
         <div className="board-content">
@@ -143,6 +144,7 @@ export default function Board(){
                         setIsAddingCard={setIsAddingCard}
                         isAddingCard={isAddingCard}
                         cards={list.cards}
+                        onCardDrop={onCardDrop}
                         />
                     ))}
                 </ol>

@@ -5,6 +5,8 @@ import { WorkspaceProvider } from './components/WorkspaceContext';
 import { ProductProvider } from './components/ProductContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FavoriteBoardsProvider } from './components/FavoriteBoardsContext';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 // Components 
 
@@ -40,9 +42,10 @@ return (
   <FavoriteBoardsProvider>
   <WorkspaceProvider>
   <ProductProvider>
+  <DndProvider backend={HTML5Backend}>
   <Router>
       <Routes>
- 
+
         {/* Protected Routes */}
         <Route element={<ProtectedRoutes />}>
           <Route path='/' element={<DashboardLayout />}>
@@ -63,6 +66,7 @@ return (
 
       </Routes>
     </Router>
+    </DndProvider>
     </ProductProvider>
     </WorkspaceProvider>
     </FavoriteBoardsProvider>

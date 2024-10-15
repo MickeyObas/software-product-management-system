@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDrag } from 'react-dnd';
 
 import Modal from "./Modal/Modal";
 import CardDescription from "./CardDescription";
@@ -13,7 +14,7 @@ import archive_icon from './assets/folder.png';
 import delete_icon from './assets/bin.png';
 import { fetchWithAuth } from "./utils";
 
-export default function Card({card, listTitle}){
+export default function Card({card, listTitle, listId}){
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,11 +26,24 @@ export default function Card({card, listTitle}){
         setIsModalOpen(false);
     };
 
+    const [{ isDragging }, drag] = useDrag({
+        type: 'CARD',
+        item: { cardId: card.id, listId }, // include listId to know the origin list
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    });
+
 
     return (
         <div>
-            <li className="list-card" onClick={handleCardClick}>
-                {card.title}
+            <li
+            className="list-card" 
+            onClick={handleCardClick}
+            ref={drag}
+            style={{ opacity: isDragging ? 0.5 : 1 }}
+            >
+            {card.title}
             </li>
             <Modal card={card} isOpen={isModalOpen} onClose={handleCloseModal} setIsModalOpen={setIsModalOpen}
             listTitle={listTitle}>   

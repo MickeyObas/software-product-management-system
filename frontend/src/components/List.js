@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDrop } from 'react-dnd';
 
 import elipsis_icon from '../components/assets/more.png';
 import plus_icon from '../components/assets/plus-white.png';
@@ -14,12 +15,25 @@ export default function List({
     list,
     setIsAddingCard,
     isAddingCard,
+    onCardDrop
 }){
 
     const {boardId} = useParams();
     const [listData, setListData] = useState(null);
     const [newCardTitle, setNewCardTitle] = useState('');
     const cards = listData ? listData.cards : [];
+
+    const [{ isOver }, drop] = useDrop({
+        accept: 'CARD',
+        drop: (item) => {
+            if (item.listId !== listId) {
+                onCardDrop(item.cardId, item.listId, listId);
+            }
+        },
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        }),
+    });
 
     useEffect(() => {
         const fetchListData = async () => {
@@ -89,17 +103,18 @@ export default function List({
     }
 
     return (
-    <li className="list-item" data-index="1">
+    <li ref={drop} className="list-item" data-index="1">
     <div className="list-item-container">
         <div className="list-item-header">
             <h2>{listData ? listData.title : 'Title'}</h2>
             <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
         </div>
-        <ol className="list-cards-container">
+        <ol className={`list-cards-container ${isOver ? 'hover' : ''}`}>
             {cards && cards.map((card, idx) => (
                 <Card 
                 card={card}
-                listTitle={list.title}    
+                listTitle={list.title}
+                listId={list.id}    
                 />
             ))}
             {(isAddingCard.status && isAddingCard.index === listId) ? (
