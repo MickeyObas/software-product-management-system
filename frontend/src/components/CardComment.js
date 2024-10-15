@@ -64,7 +64,6 @@ export default function CardComment({
     }
 
     const handleCommentChange = (e) => {
-        console.log(e.target.value);
         setNewCommentText(e.target.value);
     }
 

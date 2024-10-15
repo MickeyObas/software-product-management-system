@@ -19,7 +19,6 @@ const CardDescription = ({ initialDescription, onSave }) => {
     const contentState = editorState.getCurrentContent();
     const rawContentState = convertToRaw(contentState);
     // onSave(rawContentState);
-    console.log(JSON.stringify(rawContentState));
     setIsEditing(false);
   };
 

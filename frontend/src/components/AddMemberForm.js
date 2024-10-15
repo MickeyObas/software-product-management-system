@@ -19,7 +19,6 @@ export default function AddMemberForm({ workspaceId, setIsAddingMember }) {
                 setIsAddingMember(false);
             } else {
                 const data = await response.json();
-                console.log(data);
                 alert(`Failed to add member: ${data['detail']}`);
             }
         } catch (error) {

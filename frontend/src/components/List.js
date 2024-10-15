@@ -42,7 +42,6 @@ export default function List({
                 if(response.ok){
                     const data = await response.json();
                     setListData(data);
-                    console.log(data);
                 }else{
                     console.log("Whoops, something went wrong with ListData");
                 }

@@ -84,6 +84,7 @@ export default function Board(){
 
 
     const onCardDrop = async (cardId, sourceListId, targetListId) => {
+      console.log("Previous lists -> ", lists);
       try {
           const response = await fetchWithAuth(
               `http://localhost:8000/api/boards/${boardId}/lists/${sourceListId}/cards/${cardId}/move/`,
@@ -95,29 +96,35 @@ export default function Board(){
                   body: JSON.stringify({ target_list_id: targetListId }),
               }
           );
-
+  
           if (response.ok) {
-              const updatedLists = lists.map(list => {
-                  if (list.id === sourceListId) {
-                      return {
-                          ...list,
-                          cards: list.cards.filter(card => card.id !== cardId),
-                      };
-                  }
-                  if (list.id === targetListId) {
-                      return {
-                          ...list,
-                          cards: [...list.cards, { id: cardId }],
-                      };
-                  }
-                  return list;
-              });
-              setLists(updatedLists);
-          }
+              // Update the lists based on the move operation
+              const movedCard = await response.json();
+              setLists((prevLists) => {
+                const updatedLists = prevLists.map(list => {
+                    if (list.id === sourceListId) {
+                        return {
+                            ...list,
+                            cards: list.cards.filter(card => card.id !== cardId), // Remove from source list
+                        };
+                    }
+                    if (list.id === targetListId) {
+                        return {
+                            ...list,
+                            cards: [...list.cards, movedCard], // Add to target list
+                        };
+                    }
+                    return list;
+                });
+                console.log('Updated Lists:', updatedLists); // Log the updated lists here
+                return updatedLists; // Return updated lists for state update
+            });
+        }
       } catch (err) {
           console.error('Error moving card:', err);
       }
   };
+  
 
     return (
         <div className="board-content">
