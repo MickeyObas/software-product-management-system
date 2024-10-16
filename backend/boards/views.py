@@ -174,4 +174,25 @@ def update_recently_viewed(request, pk):
 
     return Response(board_serializer.data, status=status.HTTP_200_OK)
 
+
+@api_view(['PUT'])
+def move_card(request, board_id, list_id, card_id):
+    try:
+        card = Card.objects.get(id=card_id)
+        target_list = List.objects.get(id=request.data.get('target_list_id'))
+
+        # Ensure the card belongs to the same board
+        if card.list.board.id != int(board_id) or target_list.board.id != int(board_id):
+            return Response({"error": "Invalid board or list"}, status=400)
+
+        card.list = target_list
+        card.save()
+        serializer = CardSerializer(card)
+
+        return Response(serializer.data)
+    except Card.DoesNotExist:
+        return Response({"error": "Card not found"}, status=404)
+    except List.DoesNotExist:
+        return Response({"error": "List not found"}, status=404)
+
     

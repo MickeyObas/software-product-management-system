@@ -14,7 +14,7 @@ import archive_icon from './assets/folder.png';
 import delete_icon from './assets/bin.png';
 import { fetchWithAuth } from "./utils";
 
-export default function Card({card, listTitle, listId}){
+export default function Card({card, listTitle, listId, setLists}){
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Card({card, listTitle, listId}){
             {card.title}
             </li>
             <Modal card={card} isOpen={isModalOpen} onClose={handleCloseModal} setIsModalOpen={setIsModalOpen}
-            listTitle={listTitle}>   
+            listTitle={listTitle} setLists={setLists}>   
             </Modal>
         </div> 
     )

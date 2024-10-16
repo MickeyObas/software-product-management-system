@@ -15,6 +15,18 @@ from activities.utils import log_activity
 import json
 
 
+@api_view(['DELETE'])
+def delete_card(request, pk):
+    
+    try:
+        card = Card.objects.get(id=pk)
+    except Card.DoesNotExist:
+        return Response({"error": "Card not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    card.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(['PATCH'])
 def update_card_description(request, pk):
 

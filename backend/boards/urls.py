@@ -12,4 +12,5 @@ urlpatterns = [
     path('toggle-favorite/', views.toggle_favorite_board, name='toggle-favorite-board'),
     path('<int:pk>/lists/<int:list_id>/cards/', views.add_new_card_to_list, name='add_new_card_to_list'),
     path('<int:pk>/lists/<int:list_id>/', views.list_detail, name='list_detail'),
+    path('<int:board_id>/lists/<int:list_id>/cards/<int:card_id>/move/', views.move_card, name='move_card')
 ]

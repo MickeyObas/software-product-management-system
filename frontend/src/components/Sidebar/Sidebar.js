@@ -77,7 +77,7 @@ function Sidebar() {
         <div style={{"marginLeft": "4px", "marginBottom": "15px" ,"fontSize": "15px"}}>Workspaces</div>
         <div className="workspaces-list-container">
         {workspaces.map((workspace, idx) => (
-          <div className="workspace-item" onClick={() => handleWorkspaceClick(workspace.id)}>
+          <div key={idx} className="workspace-item" onClick={() => handleWorkspaceClick(workspace.id)}>
           <div className={`title-bar ${currentWorkspace &&(currentWorkspace.id === workspace.id) ? 'current-workspace' : ''}`}>
             <div className="icon"></div>
             <div>{workspace.title}</div>

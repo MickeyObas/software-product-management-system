@@ -15,13 +15,14 @@ export default function List({
     list,
     setIsAddingCard,
     isAddingCard,
-    onCardDrop
+    onCardDrop,
+    setLists
 }){
 
     const {boardId} = useParams();
     const [listData, setListData] = useState(null);
     const [newCardTitle, setNewCardTitle] = useState('');
-    const cards = listData ? listData.cards : [];
+    // const cards = listData ? listData.cards : [];
 
     const [{ isOver }, drop] = useDrop({
         accept: 'CARD',
@@ -79,10 +80,20 @@ export default function List({
 
             if (response.ok) {
                 const newCard = await response.json();
-                setListData((prevListData) => ({
-                    ...prevListData,
-                    cards: [...prevListData.cards, newCard],
-                }));
+                setLists((prevLists) => {
+                    const updatedLists = prevLists.map(list => {
+                        if(String(list.id) === String(listId)){
+                            console.log("Updating list to add card")
+                            return {
+                                ...list,
+                                cards: [...list.cards, newCard]
+                            }
+                        }
+                        return list;
+                    })
+                    return updatedLists;
+                })
+
                 setNewCardTitle('');
                 setIsAddingCard(false);
             } else {
@@ -109,11 +120,13 @@ export default function List({
             <img src={elipsis_icon} alt="elipsis-icon" className="list-item-menu"/>
         </div>
         <ol className={`list-cards-container ${isOver ? 'hover' : ''}`}>
-            {cards && cards.map((card, idx) => (
+            {list.cards && list.cards.map((card, idx) => (
                 <Card 
+                key={card.id}
                 card={card}
                 listTitle={list.title}
-                listId={list.id}    
+                listId={list.id}   
+                setLists={setLists} 
                 />
             ))}
             {(isAddingCard.status && isAddingCard.index === listId) ? (

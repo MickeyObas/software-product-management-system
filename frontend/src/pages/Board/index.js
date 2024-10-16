@@ -102,13 +102,13 @@ export default function Board(){
               const movedCard = await response.json();
               setLists((prevLists) => {
                 const updatedLists = prevLists.map(list => {
-                    if (list.id === sourceListId) {
+                    if (String(list.id) === String(sourceListId)) {
                         return {
                             ...list,
                             cards: list.cards.filter(card => card.id !== cardId), // Remove from source list
                         };
                     }
-                    if (list.id === targetListId) {
+                    if (String(list.id) === String(targetListId)) {
                         return {
                             ...list,
                             cards: [...list.cards, movedCard], // Add to target list
@@ -152,6 +152,7 @@ export default function Board(){
                         isAddingCard={isAddingCard}
                         cards={list.cards}
                         onCardDrop={onCardDrop}
+                        setLists={setLists}
                         />
                     ))}
                 </ol>

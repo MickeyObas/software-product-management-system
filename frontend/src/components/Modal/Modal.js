@@ -21,6 +21,7 @@ export default function Modal({
   onClose,
   listTitle,
   setIsModalOpen,
+  setLists,
   children }) {
   
       // Card Values
@@ -156,6 +157,38 @@ export default function Modal({
           setIsEditingComment(false);
           handleSaveComment();
       }
+
+      const handleDeleteCardClick = () => {
+        handleDeleteCard();
+      }
+
+      const handleDeleteCard = async () => {
+        try{
+            const response = await fetchWithAuth(`http://localhost:8000/api/cards/${card.id}/delete/`, {
+                method: 'DELETE'
+            });
+            if(response.ok){
+                let deletedCardId = card.id;
+                setLists((prevLists) => {
+                    const updatedLists = prevLists.map(list => {
+                        if(String(card.list.id === list.id)){
+                            return {
+                                ...list,
+                                cards: [...list.cards.filter(card => card.id !== deletedCardId)]
+                            }
+                        }
+                        return list;
+                    })
+                    return updatedLists;
+                });
+                setIsModalOpen(false);
+            }
+        } catch(err){
+            console.log(err)
+        }
+      }
+
+
     if (!isOpen) return null;
   
     return (
@@ -314,7 +347,7 @@ export default function Modal({
                                 />
                                 <div>Archive</div>
                             </div>
-                            <div className="card-sidebar-tab">
+                            <div className="card-sidebar-tab" onClick={handleDeleteCardClick}>
                                 <img className="icon"
                                 src={delete_icon}
                                 alt="delete-icon"
